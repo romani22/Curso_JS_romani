@@ -8,7 +8,7 @@ function presupuesto() {
     let rubro = null;
     while (condicion == 1) {
         rubro = prompt("Escriba el numero del rubro quiere su presupuesto. \n 1- Albañileria \n 2- Electricidad \n 3- Plomeria \n 4- Pintura \n 5- Servicios Profesionales");
-        while (rubro == "" || (rubro != "1" && rubro != "2" && rubro != "3" && rubro != "4" && rubro != "5")) {
+        while (rubro == "" && (rubro != "1" && rubro != "2" && rubro != "3" && rubro != "4" && rubro != "5")) {
             alert("Debe escribir un rubro");
             rubro = prompt("Escriba el numero del rubro quiere su presupuesto. \n 1- Albañileria \n 2- Electricidad \n 3- Plomeria \n 4- Pintura \n 5- Servicios Profesionales");
         }
@@ -121,5 +121,16 @@ function presupuesto() {
         texto_presupuesto = "Presupuesto No Realizado";
     }
     alert(texto_presupuesto);
+
+    condicion = prompt("Desea Realizar otro presupuesto? \n 1- Sí \n 2- No");
+    while (condicion == null || condicion == "" || (condicion != "1" && condicion != "2")) {
+        alert("Debe seleccionar 1 o 2");
+        condicion = prompt("Desea Realizar otro presupuesto? \n 1- Sí \n 2- No");
+    }
+    if (condicion == 1) {
+        presupuesto();
+    } else {
+        alert("Gracias... \nVuelva pronto")
+    }
 }
 presupuesto();
