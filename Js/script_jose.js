@@ -8,23 +8,24 @@ function presupuesto() {
     let rubro = null;
     while (condicion == 1) {
         rubro = prompt("Escriba el numero del rubro quiere su presupuesto. \n 1- Albañileria \n 2- Electricidad \n 3- Plomeria \n 4- Pintura \n 5- Servicios Profesionales");
-        while (rubro == "") {
+        while (rubro == "" || (rubro != "1" && rubro != "2" && rubro != "3" && rubro != "4" && rubro != "5")) {
             alert("Debe escribir un rubro");
             rubro = prompt("Escriba el numero del rubro quiere su presupuesto. \n 1- Albañileria \n 2- Electricidad \n 3- Plomeria \n 4- Pintura \n 5- Servicios Profesionales");
         }
         if (rubro != null) {
             let trabajo = prompt("Escriba el Trabajo a realizar");
-            while (trabajo == null || trabajo == "") {
+            console.log("trabajo" + isNaN(trabajo));
+            while (trabajo == null || trabajo == "" || isNaN(trabajo) == false) {
                 alert("Debe escribir el nombre del trabajo a realizar");
                 trabajo = prompt("Escriba el Trabajo a realizar");
             }
             let precio = prompt("Escriba el Valor por unidad del trabajo a realizar");
-            while (precio == null || precio == "") {
+            while (precio == null || precio == "" || isNaN(precio) == true) {
                 alert("Debe escribir el precio del trabajo a realizar");
                 precio = prompt("Escriba el Valor por unidad del trabajo a realizar");
             }
             let cantidad = prompt("Escriba la cantidad del trabajo por unidad a realizar");
-            while (cantidad == null || cantidad == "") {
+            while (cantidad == null || cantidad == "" || isNaN(cantidad) == true) {
                 alert("Debe escribir la cantidad de trabajo a realizar");
                 cantidad = prompt("Escriba la cantidad del trabajo por unidad a realizar");
             }
