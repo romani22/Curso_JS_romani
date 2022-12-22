@@ -293,6 +293,14 @@ function buscar_presupuesto() {
         }
         busqueda_x_cliente(name);
     }
+    if (busqueda == "2") {
+        let name = prompt("¿El presupuesto de quien deseas buscar?");
+        while (name == null || name == "") {
+            alert("Debe escribir el nombre del cliente");
+            name = prompt("¿El presupuesto de quien deseas buscar?");
+        }
+        busqueda_x_trabajo(name);
+    }
 }
 
 function busqueda_x_cliente(name) {
@@ -302,4 +310,47 @@ function busqueda_x_cliente(name) {
     } else {
         alert("no se encontro");
     }
+}
+function busqueda_x_trabajo(name) {
+    let resultado = "";
+    presupuestos.forEach(element => {
+        element.albanileria.forEach(el => {
+            if (el["trabajo"] == name) {
+                resultado = element.NombreCliente;
+                return;
+            }
+        });
+        element.electricidad.forEach(el => {
+            if (el["trabajo"] == name) {
+                resultado = element.NombreCliente;
+                return;
+            }
+        });
+        element.pintura.forEach(el => {
+            if (el["trabajo"] == name) {
+                resultado = element.NombreCliente;
+                return;
+            }
+        });
+        element.plomeria.forEach(el => {
+            if (el["trabajo"] == name) {
+                resultado = element.NombreCliente;
+                return;
+            }
+        });
+        element.servicios.forEach(el => {
+            if (el["trabajo"] == name) {
+                resultado = element.NombreCliente;
+                return;
+            }
+        });
+        if (resultado != "") {
+            mostrarPresupuesto(resultado)
+        }
+    });
+    if (resultado == "") {
+        alert("no se encontro");
+    }
+
+
 }
