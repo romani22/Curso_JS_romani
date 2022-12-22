@@ -175,7 +175,7 @@ function mostrarPresupuesto(nombre, ubicacion) {
 
 
             if (texto_presupuesto != "") {
-                texto_presupuesto = "PRESUPUESTO  de:" + texto_NombreCliente + "\n" + texto_presupuesto;
+                texto_presupuesto = "PRESUPUESTO  de: " + texto_NombreCliente + "\n" + texto_presupuesto;
                 texto_presupuesto = texto_presupuesto + "\nPrecio Final: $" + total;
             } else {
                 texto_presupuesto = "Presupuesto No Realizado";
@@ -248,7 +248,7 @@ function mostrarPresupuesto(nombre, ubicacion) {
 
 
                 if (texto_presupuesto != "") {
-                    texto_presupuesto = "PRESUPUESTO  de:" + texto_NombreCliente + "\n" + texto_presupuesto;
+                    texto_presupuesto = "PRESUPUESTO  de: " + texto_NombreCliente + "\n" + texto_presupuesto;
                     texto_presupuesto = texto_presupuesto + "\nPrecio Final: $" + total;
                 } else {
                     texto_presupuesto = "Presupuesto No Realizado";
