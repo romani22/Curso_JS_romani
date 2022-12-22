@@ -294,10 +294,10 @@ function buscar_presupuesto() {
         busqueda_x_cliente(name);
     }
     if (busqueda == "2") {
-        let name = prompt("¿El presupuesto de quien deseas buscar?");
+        let name = prompt("¿Que trabajo deseas buscar?");
         while (name == null || name == "") {
-            alert("Debe escribir el nombre del cliente");
-            name = prompt("¿El presupuesto de quien deseas buscar?");
+            alert("Debe escribir el nombre del trabajo");
+            name = prompt("¿Que trabajo deseas buscar?");
         }
         busqueda_x_trabajo(name);
     }
