@@ -5,14 +5,132 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 
-<body>
-    <h2>Hola Bienvenido/a A tu Presupuestacion!</h2>
-    <button onclick="presupuesto()">Crear Presupuesto</button>
-    <button onclick="buscar_presupuesto()">Buscar Presupuesto</button>
-    <script src="Js/script_jose.js"></script>
+<body class="fondoPage">
+    <div class="row justify-content-center mt-3">
+        <div class="w-75 fondoCard text-white p-3">
+            <h1 class="text-center">Presupuesto Constructivos...</h1>
+            <h2 class="text-center">Hola Bienvenido/a!</h2>
+            <div class="d-flex justify-content-center mb-3">
+                <button class="btn btn-primary" id="btnNewItems">Crear items</button>
+                <button class="btn btn-success ms-3" id="btnNew">Crear Presupuesto</button>
+                <button class="btn btn-danger ms-3" id="btnSearch">Buscar Presupuesto</button>
+            </div>
+
+            <div class="row justify-content-center descartar" id="createItems">
+                <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <label for="rubros">Seleccione el Rubro del item:</label>
+                            <select name="rubros" class="form-control" id="rubros">
+                                <option value="1">Albañileria</option>
+                                <option value="2">Electricidad</option>
+                                <option value="3">Plomeria</option>
+                                <option value="4">Pintura</option>
+                                <option value="5">Servicios Profesionales</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-2 pb-3 pt-2 fondoItemsUni">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-warning" id="createNewItem">
+                                <i class="fa fa-plus text-light" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="row justify-content-center" id="idNewWork">
+                            <div class="col-8 row">
+                                <div class="col-6">
+                                    <label for="nameWork">Nombre del trabajo</label>
+                                    <input type="text" placeholder="Nombre del trabajo a realizar" class="form-control"
+                                        id="nameWork_0">
+                                </div>
+                                <div class="col-6">
+                                    <label for="valueUni">Valor por unidad</label>
+                                    <input type="number" placeholder="Valor por unidad del trabajo" class="form-control"
+                                        id="valueUni_0">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                    <button class="btn btn-success btn-md" id="btnSaveNewWork"><i class="fa fa-check"
+                            aria-hidden="true"></i></button>
+                    <button class="btn btn-danger btn-md ms-3" id="btnCleanNewWork"><i class="fa fa-times"
+                            aria-hidden="true"></i></button>
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center descartar" id="createPresup">
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <label for="cliente">Nombre del cliente:</label>
+                        <input type="text" class="form-control" id="nameCustomer">
+                    </div>
+                </div>
+
+                <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
+                    <div class="d-flex justify-content-end mt-2">
+                        <button class="btn btn-sm btn-warning" id="addRubro">
+                            <i class="fa fa-plus text-light" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <label for="rubros">Rubros:</label>
+                            <select name="rubros" class="form-control" id="rubros">
+                                <option value="1">Albañileria</option>
+                                <option value="2">Electricidad</option>
+                                <option value="3">Plomeria</option>
+                                <option value="4">Pintura</option>
+                                <option value="5">Servicios Profesionales</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-2 pb-3 pt-2 fondoItemsUni">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-warning" id="addItem">
+                                <i class="fa fa-plus text-light" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="row" id="id_item">
+                            <div class="col-4">
+                                <label for="nameWork">Nombre del trabajo</label>
+                                <input type="text" placeholder="Trabajo a realizar" class="form-control" id="nameWork">
+                            </div>
+                            <div class="col-4">
+                                <label for="valueUni">Valor por unidad</label>
+                                <input type="number" placeholder="Valor por unidad" class="form-control" id="valueUni">
+                            </div>
+                            <div class="col-4">
+                                <label for="CantWork">Cant. de trabajo por unidad:</label>
+                                <input type="number" placeholder="Cantidad de trabajo a realizar" class="form-control"
+                                    id="CantWork">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                    <button class="btn btn-success btn-md"><i class="fa fa-check" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger btn-md ms-3"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="Js/Script_final.js"></script>
 </body>
 
 </html>

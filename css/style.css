@@ -1,0 +1,21 @@
+.fondoPage {
+    background-image: url("../assets/img/construccion_cielo.png");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.fondoCard {
+    background: #4a4a4aab;
+}
+
+.fondoItems {
+    background: #00000073;
+}
+
+.fondoItemsUni {
+    background: #ffffff73;
+}
+
+.descartar {
+    display: none;
+}
