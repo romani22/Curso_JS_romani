@@ -16,12 +16,13 @@
 </head>
 
 <body class="fondoPage">
-    <div class="row justify-content-center mt-3">
+    <div class="d-flex justify-content-center mt-3">
         <div class="w-75 fondoCard text-white p-3">
             <h1 class="text-center">Presupuesto Constructivos...</h1>
             <h2 class="text-center">Hola Bienvenido/a!</h2>
-            <div class="d-flex justify-content-center mb-3">
-                <button class="btn btn-primary" id="btnNewItems">Crear items</button>
+            <div class="d-flex justify-content-center mb-3" id="dicBtnsPrimary">
+                <button class="btn btn-warning" id="btnNewItems">Crear Trabajo</button>
+                <button class="btn btn-primary ms-3" id="btnEditWork">Editar Trabajo Guardado</button>
                 <button class="btn btn-success ms-3" id="btnNew">Crear Presupuesto</button>
                 <button class="btn btn-danger ms-3" id="btnSearch">Buscar Presupuesto</button>
             </div>
@@ -30,33 +31,37 @@
                 <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
                     <div class="row justify-content-center">
                         <div class="col-4">
-                            <label for="rubros">Seleccione el Rubro del item:</label>
-                            <select name="rubros" class="form-control" id="rubros">
-                                <option value="1">Albañileria</option>
-                                <option value="2">Electricidad</option>
-                                <option value="3">Plomeria</option>
-                                <option value="4">Pintura</option>
-                                <option value="5">Servicios Profesionales</option>
+                            <label for="rubrosNewWork">Seleccione el Rubro del item:</label>
+                            <select name="rubrosNewWork" class="form-control" id="rubrosNewWork">
+                                <option value="Albanileria">Albañileria</option>
+                                <option value="Electricidad">Electricidad</option>
+                                <option value="Plomeria">Plomeria</option>
+                                <option value="Pintura">Pintura</option>
+                                <option value="Servicios">Servicios Profesionales</option>
                             </select>
                         </div>
                     </div>
-                    <div class="row justify-content-center mt-2 pb-3 pt-2 fondoItemsUni">
+                    <div class="row justify-content-center mt-2 pb-3 pt-2 fondoItemsUni" id="divNewWorks">
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-sm btn-warning" id="createNewItem">
+                            <button class="btn btn-sm btn-danger  descartar" id="deleteNewWork">
+                                <i class="fa fa-minus text-light" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning ms-2" id="createNewWork">
                                 <i class="fa fa-plus text-light" aria-hidden="true"></i>
                             </button>
+
                         </div>
                         <div class="row justify-content-center" id="idNewWork">
-                            <div class="col-8 row">
+                            <div class="col-8 row" id="id_work_0">
                                 <div class="col-6">
                                     <label for="nameWork">Nombre del trabajo</label>
                                     <input type="text" placeholder="Nombre del trabajo a realizar" class="form-control"
-                                        id="nameWork_0">
+                                        id="nameWork_0" value="">
                                 </div>
                                 <div class="col-6">
                                     <label for="valueUni">Valor por unidad</label>
                                     <input type="number" placeholder="Valor por unidad del trabajo" class="form-control"
-                                        id="valueUni_0">
+                                        id="valueUni_0" value="">
                                 </div>
                             </div>
                         </div>
@@ -70,6 +75,37 @@
                             aria-hidden="true"></i></button>
                 </div>
 
+            </div>
+
+            <div class="row justify-content-center descartar" id="tableWork">
+                <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <label for="rubrosTableWork">Seleccione el Rubro</label>
+                            <select name="rubrosTableWork" class="form-control" id="rubrosTableWork">
+                                <option value="Albanileria">Albañileria</option>
+                                <option value="Electricidad">Electricidad</option>
+                                <option value="Plomeria">Plomeria</option>
+                                <option value="Pintura">Pintura</option>
+                                <option value="Servicios">Servicios Profesionales</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-2 pb-3 pt-2" id="divNewWorks">
+                        <table class="table table-bordered" cellspacing="0" width="100%">
+                            <thead class="table-dark table-bordered border-light">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Valor por unidad</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyWorks" class="table-light  table-bordered border-dark">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class="row justify-content-center descartar" id="createPresup">
@@ -88,35 +124,38 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-4">
-                            <label for="rubros">Rubros:</label>
-                            <select name="rubros" class="form-control" id="rubros">
-                                <option value="1">Albañileria</option>
-                                <option value="2">Electricidad</option>
-                                <option value="3">Plomeria</option>
-                                <option value="4">Pintura</option>
-                                <option value="5">Servicios Profesionales</option>
+                            <label for="rubroPresupuesto">Rubros:</label>
+                            <select name="rubroPresupuesto_0" class="form-control" id="rubroPresupuesto_0">
+                                <option value="Albanileria">Albañileria</option>
+                                <option value="Electricidad">Electricidad</option>
+                                <option value="Plomeria">Plomeria</option>
+                                <option value="Pintura">Pintura</option>
+                                <option value="Servicios">Servicios Profesionales</option>
                             </select>
                         </div>
                     </div>
                     <div class="row justify-content-center mt-2 pb-3 pt-2 fondoItemsUni">
+                        <input type="hidden" value="0" id="cantItems_0">
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-sm btn-warning" id="addItem">
+                            <button class="btn btn-sm btn-warning" id="addItem_0">
                                 <i class="fa fa-plus text-light" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <div class="row" id="id_item">
-                            <div class="col-4">
-                                <label for="nameWork">Nombre del trabajo</label>
-                                <input type="text" placeholder="Trabajo a realizar" class="form-control" id="nameWork">
-                            </div>
-                            <div class="col-4">
-                                <label for="valueUni">Valor por unidad</label>
-                                <input type="number" placeholder="Valor por unidad" class="form-control" id="valueUni">
-                            </div>
-                            <div class="col-4">
-                                <label for="CantWork">Cant. de trabajo por unidad:</label>
-                                <input type="number" placeholder="Cantidad de trabajo a realizar" class="form-control"
-                                    id="CantWork">
+                        <div class="row" id="id_item_0">
+                            <div class="row mt-3" id="divitems_0">
+                                <div class="col-4">
+                                    <label for="nameWork">Nombre del trabajo</label>
+                                    <select name="namesWork_0_0" class="form-control" id="namesWork_0_0"></select>
+                                </div>
+                                <div class="col-4">
+                                    <label for="valueUni">Valor por unidad</label>
+                                    <input type="number" disabled value="0" class="form-control" id="valueUni_0_0">
+                                </div>
+                                <div class="col-4">
+                                    <label for="CantWork">Cant. de trabajo por unidad:</label>
+                                    <input type="number" placeholder="Cantidad de trabajo a realizar"
+                                        class="form-control" id="CantWork_0_0">
+                                </div>
                             </div>
                         </div>
 

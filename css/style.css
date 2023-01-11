@@ -17,5 +17,5 @@
 }
 
 .descartar {
-    display: none;
+    display: none !important;
 }
