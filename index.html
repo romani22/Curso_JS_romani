@@ -117,15 +117,10 @@
                 </div>
 
                 <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
-                    <div class="d-flex justify-content-end mt-2">
-                        <button class="btn btn-sm btn-warning" id="addRubro">
-                            <i class="fa fa-plus text-light" aria-hidden="true"></i>
-                        </button>
-                    </div>
                     <div class="row justify-content-center">
-                        <div class="col-4">
+                        <div class="col">
                             <label for="rubroPresupuesto">Rubros:</label>
-                            <select name="rubroPresupuesto_0" class="form-control" id="rubroPresupuesto_0">
+                            <select name="rubroPresupuesto" class="form-control" id="rubroPresupuesto">
                                 <option value="Albanileria">Albañileria</option>
                                 <option value="Electricidad">Electricidad</option>
                                 <option value="Plomeria">Plomeria</option>
@@ -133,32 +128,47 @@
                                 <option value="Servicios">Servicios Profesionales</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="row justify-content-center mt-2 pb-3 pt-2 fondoItemsUni">
-                        <input type="hidden" value="0" id="cantItems_0">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-sm btn-warning" id="addItem_0">
+                        <div class="col">
+                            <label for="nameWork">Nombre del trabajo</label>
+                            <select name="namesWork" class="form-control" id="namesWork"></select>
+                        </div>
+                        <div class="col">
+                            <label for="valueUni">Valor por unidad</label>
+                            <input type="number" disabled value="0" class="form-control" id="valueUni">
+                        </div>
+                        <div class="col ">
+                            <label for="CantWork">Cant. de trabajo:</label>
+                            <input type="number" placeholder="Cantidad de trabajo a realizar" class="form-control"
+                                id="CantWork">
+                        </div>
+                        <div class="col-1 d-flex justify-content-center align-items-center">
+                            <button class="btn btn-sm btn-warning" id="addItem">
                                 <i class="fa fa-plus text-light" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <div class="row" id="id_item_0">
-                            <div class="row mt-3" id="divitems_0">
-                                <div class="col-4">
+                    </div>
+
+
+                    <div class="row justify-content-center mt-2 pb-3 pt-2 fondoItemsUni">
+                        <input type="hidden" value="0" id="cantItems">
+                        <div class="row" id="id_item">
+                            <div class="d-flex">
+                                <div class="col-1">
+                                </div>
+                                <div class="col">
                                     <label for="nameWork">Nombre del trabajo</label>
-                                    <select name="namesWork_0_0" class="form-control" id="namesWork_0_0"></select>
                                 </div>
-                                <div class="col-4">
+                                <div class="col">
                                     <label for="valueUni">Valor por unidad</label>
-                                    <input type="number" disabled value="0" class="form-control" id="valueUni_0_0">
                                 </div>
-                                <div class="col-4">
-                                    <label for="CantWork">Cant. de trabajo por unidad:</label>
-                                    <input type="number" placeholder="Cantidad de trabajo a realizar"
-                                        class="form-control" id="CantWork_0_0">
+                                <div class="col">
+                                    <label for="CantWork">Cant. de trabajo</label>
+                                </div>
+                                <div class="col">
+                                    <label for="CantWork">Total</label>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-3">

@@ -7,8 +7,7 @@ let btnCreateNewwork = document.getElementById("createNewWork");
 let btnDeleteNewWork = document.getElementById("deleteNewWork");
 let btnCleanNewWork = document.getElementById("btnCleanNewWork");
 let btnSaveNewWork = document.getElementById("btnSaveNewWork");
-let btnAddItem = document.getElementById("addItem_0");
-let btnAddRubro = document.getElementById("addRubro");
+let btnAddItem = document.getElementById("addItem");
 
 
 //Elementos de view por id
@@ -17,6 +16,7 @@ let idNewWork = document.getElementById("idNewWork");
 let tableWork = document.getElementById("tableWork");
 let createItems = document.getElementById("createItems");
 let createPresup = document.getElementById("createPresup");
+let rubroPresupuesto = document.getElementById("rubroPresupuesto");
 
 let arraySelect = [];
 let workStorage = new Array();
@@ -24,6 +24,8 @@ let cantStoragePresupuestos = localStorage.getItem("Presup");
 let cantNewWork = 0;
 let cantItems = 0;
 let cantRubros = 0;
+let btnsPresupuesto = new Array();
+
 btnCleanNewWork.onclick = () => {
     limpiarOcultarWorks();
 }
@@ -31,11 +33,10 @@ btnSaveNewWork.onclick = () => {
     saveWork();
 }
 btnNew.onclick = () => {
-    rubroPresupuesto = document.getElementById("rubroPresupuesto_0");
     rubroPresupuesto.addEventListener('change', () => {
-        cambiarSelectPresupuesto(0);
+        completarSelect();
     });
-    completarSelect(0, 0);
+    completarSelect();
     mostrarView("createPresup");
 
 }
@@ -140,69 +141,74 @@ function deleteStorage(elem) {
     }
 }
 
-function completarSelect(id_item, id_items) {
-    let rubro = document.getElementById("rubroPresupuesto_" + id_item).value;
-    let select = document.getElementById("namesWork_" + id_item + "_" + id_items);
+function completarSelect() {
+    let rubro = document.getElementById("rubroPresupuesto").value;
+    let select = document.getElementById("namesWork");
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     let options = "";
     workStorage.forEach(element => {
         options += `<option value="${element.id}">${element.name}</option>`;
     });
-    select.innerHTML += options;
-    arraySelect.push(select);
-    activarSelect();
-}
-function activarSelect() {
-    arraySelect.forEach(element => {
-        let select = document.getElementById(element.id);
-        select.addEventListener('change', () => {
-            var selectedOption = select.options[select.selectedIndex];
-            valorSelect(select.id, selectedOption.value);
-        });
+    select.innerHTML = options;
+    valorSelect(rubro, workStorage[0].id);
+    select.addEventListener('change', () => {
+        var selectedOption = select.options[select.selectedIndex];
+        valorSelect(rubro, selectedOption.value);
     });
-
 }
-function valorSelect(idSelect, idValue) {
-    let datosSelect = idSelect.split("_");
-    let rubro = document.getElementById("rubroPresupuesto_" + datosSelect[1]).value;
+
+function valorSelect(rubro, selected) {
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    Valor = workStorage.filter((item) => item.id == idValue)
-    document.getElementById("valueUni_" + datosSelect[1] + "_" + datosSelect[2]).value = Valor[0].valorUni;
-}
-
-function addItemPresupuesto(id) {
-    let cantItems = document.getElementById("cantItems_" + id).value;
-    cantItems++;
-    document.getElementById("cantItems_" + id).value = cantItems;
-
-    let itemsPresupuesto = document.getElementById("id_item_0");
-    let item = `<div class="row mt-3" id="divitems_${cantItems}">
-                    <div class="col-4">
-                        <select name="namesWork_${id}_${cantItems}" class="form-control" id="namesWork_${id}_${cantItems}"></select>
-                    </div>
-                    <div class="col-4">
-                        <input type="number" disabled class="form-control" value="0" id="valueUni_${id}_${cantItems}">
-                    </div>
-                    <div class="col-4">
-                        <input type="number" placeholder="Cantidad de trabajo a realizar" class="form-control" id="CantWork_${id}_${cantItems}">
-                    </div>
-                </div>`;
-    console.log(itemsPresupuesto);
-    itemsPresupuesto.innerHTML += item;
-    completarSelect(id, cantItems);
+    Valor = workStorage.filter((item) => item.id == selected)
+    document.getElementById("valueUni").value = Valor[0].valorUni;
 }
 
 btnAddItem.onclick = () => {
-    datosbtn = btnAddItem.id.split("_");
-    addItemPresupuesto(datosbtn[1]);
+    addNewItemPres();
+}
+function addNewItemPres() {
+    let itemsPresupuesto = document.getElementById("id_item");
+    let valorUniNew = document.getElementById("valueUni").value;
+    let select = document.getElementById("namesWork");
+    let opcionSeleccionada = select.options[select.selectedIndex];
+    let valorSelectNew = opcionSeleccionada.value;
+    let textSelectNew = opcionSeleccionada.text;
+    let valorCantNew = document.getElementById("CantWork").value;
+    let valTotal = valorCantNew * valorUniNew;
+    let item = `<div class="d-flex" id="item_${cantItems}">
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-danger" id="deleteItem_${cantItems}"><i class="fa fa-minus text-light" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="col">
+                        <input type="hidden" disabled class="form-control" value="${valorSelectNew}" id="select_${cantItems}">
+                        <input type="text" disabled class="form-control" value="${textSelectNew}" id="select_${cantItems}">
+                    </div>
+                    <div class="col">
+                        <input type="text" disabled class="form-control" value="$ ${valorUniNew}" id="valueUni_${cantItems}">
+                    </div>
+                    <div class="col">
+                        <input type="text" disabled value="$ ${valorCantNew}" class="form-control" id="CantWork_${cantItems}">
+                    </div>
+                    <div class="col">
+                        <input type="text" disabled value="$ ${valTotal}" class="form-control" id="CantWork_${cantItems}">
+                    </div>
+                </div>`;
+    itemsPresupuesto.innerHTML += item;
+    let newBoton = document.getElementById("deleteItem_" + cantItems);
+    btnsPresupuesto.push(newBoton);
+    activarBotones()
+    cantItems++;
 }
 
-function cambiarSelectPresupuesto(id) {
+function activarBotones() {
+    btnsPresupuesto.forEach(element => {
+        let boton = document.getElementById(element.id);
+        boton?.addEventListener('click', () => {
+            let id = boton.id;
+            elem = id.split("_")
+            document.getElementById("item_" + elem[1]).remove();
 
-    let cantItems = document.getElementById("cantItems_" + id).value;
-    document.getElementById("cantItems_" + id).value = 0;
-    for (let i = 1; i <= cantItems; i++) {
-        document.getElementById("divitems_" + i).remove();
-    }
-    // namesWork_
+        });
+    });
+
 }
