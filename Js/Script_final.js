@@ -460,10 +460,19 @@ function deleteStorage(elem) {
     rubro = elem[0];
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     work_Id = elem[1];
-    if (confirm("¿desea eliminar este trabajo?")) {
-        workStorage = workStorage.filter((item) => item.id != work_Id)
-        newWorkJSON = JSON.stringify(workStorage);
-        localStorage.setItem(rubro, newWorkJSON);
-        completarTable();
-    }
+    Swal.fire({
+        title: '¿desea eliminar este Trabajo? No se puede recuperar',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Sí',
+        denyButtonText: `No`,
+        allowOutsideClick: false,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            workStorage = workStorage.filter((item) => item.id != work_Id)
+            newWorkJSON = JSON.stringify(workStorage);
+            localStorage.setItem(rubro, newWorkJSON);
+            completarTable();
+        }
+    })
 }
