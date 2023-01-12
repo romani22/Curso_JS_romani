@@ -11,13 +11,15 @@ let btnAddItem = document.getElementById("addItem");
 let btnCancelarPresup = document.getElementById("btnCancelarPresup");
 let btnSavePresup = document.getElementById("btnSavePresup");
 
+
+
 //Elementos de view por id
 let dicBtnsPrimary = document.getElementById("dicBtnsPrimary");
 let idNewWork = document.getElementById("idNewWork");
 let tableWork = document.getElementById("tableWork");
 let viewPres = document.getElementById("viewPres");
 let viewPresXId = document.getElementById("viewPresXId");
-
+let selectRubroTable = document.getElementById("rubrosTableWork");
 let createItems = document.getElementById("createItems");
 let createPresup = document.getElementById("createPresup");
 let rubroPresupuesto = document.getElementById("rubroPresupuesto");
@@ -360,4 +362,8 @@ btnSearch.onclick = () => {
     } else {
         alert("no existen Presupuestos");
     }
+}
+
+selectRubroTable.onchange = () => {
+    completarTable();
 }
