@@ -8,7 +8,8 @@ let btnDeleteNewWork = document.getElementById("deleteNewWork");
 let btnCleanNewWork = document.getElementById("btnCleanNewWork");
 let btnSaveNewWork = document.getElementById("btnSaveNewWork");
 let btnAddItem = document.getElementById("addItem");
-
+let btnCancelarPresup = document.getElementById("btnCancelarPresup");
+let btnSavePresup = document.getElementById("btnSavePresup");
 
 //Elementos de view por id
 let dicBtnsPrimary = document.getElementById("dicBtnsPrimary");
@@ -174,23 +175,25 @@ function addNewItemPres() {
     let valorSelectNew = opcionSeleccionada.value;
     let textSelectNew = opcionSeleccionada.text;
     let valorCantNew = document.getElementById("CantWork").value;
+    let rubroPresupuesto = document.getElementById("rubroPresupuesto").value;
     let valTotal = valorCantNew * valorUniNew;
     let item = `<div class="d-flex" id="item_${cantItems}">
                     <div class="col-1">
                         <button class="btn btn-sm btn-danger" id="deleteItem_${cantItems}"><i class="fa fa-minus text-light" aria-hidden="true"></i></button>
                     </div>
                     <div class="col">
-                        <input type="hidden" disabled class="form-control" value="${valorSelectNew}" id="select_${cantItems}">
+                        <input type="hidden" disabled class="form-control" value="${valorSelectNew}" id="select_val_${cantItems}">
+                        <input type="hidden" disabled class="form-control" value="${rubroPresupuesto}" id="rubro_id_${cantItems}">
                         <input type="text" disabled class="form-control" value="${textSelectNew}" id="select_${cantItems}">
                     </div>
                     <div class="col">
-                        <input type="text" disabled class="form-control" value="$ ${valorUniNew}" id="valueUni_${cantItems}">
+                        <input type="text" disabled class="form-control" value="$ ${valorUniNew}" id="valorUni_pres_${cantItems}">
                     </div>
                     <div class="col">
                         <input type="text" disabled value="$ ${valorCantNew}" class="form-control" id="CantWork_${cantItems}">
                     </div>
                     <div class="col">
-                        <input type="text" disabled value="$ ${valTotal}" class="form-control" id="CantWork_${cantItems}">
+                        <input type="text" disabled value="$ ${valTotal}" class="form-control" id="CantTotalWork_${cantItems}">
                     </div>
                 </div>`;
     itemsPresupuesto.innerHTML += item;
@@ -211,4 +214,55 @@ function activarBotones() {
         });
     });
 
+}
+
+btnSavePresup.onclick = () => {
+    let itemsPresup = Array();
+    let totalFinal = 0;
+    let name_presupuesto = document.getElementById("nameCustomer")?.value
+    if (name_presupuesto) {
+        for (let i = 0; i < cantItems; i++) {
+            let id_name = document.getElementById("select_val_" + i)?.value;
+            let rubro = document.getElementById("rubro_id_" + i)?.value;
+            let valueUni = document.getElementById("valorUni_pres_" + i)?.value;
+            let CantWork = document.getElementById("CantWork_" + i)?.value;
+            let CantTotalWork = document.getElementById("CantTotalWork_" + i)?.value;
+            if (id_name) {
+                itemsPresup.push({ "rubro": rubro, "id_name": id_name, "valueUni": valueUni, "CantWork": CantWork, "CantTotalWork": CantTotalWork });
+                elem = CantTotalWork.split("$ ")
+                totalFinal = totalFinal + parseInt(elem[1]);
+            }
+        }
+        if (itemsPresup.length > 0) {
+            Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
+            Presupuesto.push({ "id": Presupuesto.length, "name_presupuesto": name_presupuesto, "items": itemsPresup, "totalPresup": totalFinal });
+            newPresupuestoJSON = JSON.stringify(Presupuesto);
+            localStorage.setItem("presupuesto", newPresupuestoJSON);
+            limpiarPresupuesto();
+            let idPresupuesto = Presupuesto.length - 1;
+            mostrarPresupuesto(idPresupuesto);
+
+        } else {
+            alert("completa todo los campos!")
+        }
+    } else {
+        alert("completa todo los campos!")
+    }
+}
+
+function limpiarPresupuesto() {
+    for (let i = cantItems; i >= 0; i--) {
+        let div = document.getElementById("item_" + i);
+        div?.remove()
+    }
+    document.getElementById("CantWork").value = "";
+    document.getElementById("nameCustomer").value = "";
+    cantItems = 0;
+    document.getElementById("createPresup").classList.add("descartar");
+}
+
+function mostrarPresupuesto(id) {
+    Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
+    presupuestoMostrar = Presupuesto.filter((item) => item.id == id)
+    console.log(presupuestoMostrar);
 }
