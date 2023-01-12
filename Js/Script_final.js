@@ -119,15 +119,39 @@ function saveWork() {
     let rubro = document.getElementById("rubrosNewWork").value;
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     let id = workStorage?.length || 0;
+    let idControl = id;
     for (let i = 0; i <= cantNewWork; i++) {
-        let nameNewWork = document.getElementById("nameWork_" + i).value;
-        let valorNewWork = document.getElementById("valueUni_" + i).value;
-        workStorage[id] = { "id": id, "name": nameNewWork, "valorUni": valorNewWork };
-        id++;
-        newWorkJSON = JSON.stringify(workStorage);
-        localStorage.setItem(rubro, newWorkJSON);
+        let nameNewWork = document.getElementById("nameWork_" + i).value || "";
+        let valorNewWork = document.getElementById("valueUni_" + i).value || "";
+        if (nameNewWork != "" && valorNewWork != "") {
+            workStorage[id] = { "id": id, "name": nameNewWork, "valorUni": valorNewWork };
+            id++;
+            newWorkJSON = JSON.stringify(workStorage);
+            localStorage.setItem(rubro, newWorkJSON);
+        }
     }
-    limpiarOcultarWorks();
+    if (idControl < id) {
+        Swal.fire({
+            title: 'Correcto!',
+            html: 'Se guardo correctamente el trabajo nuevo.',
+            icon: 'success',
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+        limpiarOcultarWorks();
+    } else {
+        Swal.fire({
+            title: 'Atencion!',
+            html: 'Debe completar todo los campos.',
+            icon: 'error',
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+        return false;
+    }
+
 
 }
 function completarTable() {
@@ -270,12 +294,35 @@ btnSavePresup.onclick = () => {
             limpiarPresupuesto();
             let idPresupuesto = Presupuesto.length - 1;
             mostrarPresupuesto(idPresupuesto);
-
+            Swal.fire({
+                title: 'Correcto!',
+                html: 'Se guardo correctamente el trabajo nuevo.',
+                icon: 'success',
+                showCloseButton: true,
+                showCancelButton: false,
+                showConfirmButton: false
+            });
         } else {
-            alert("completa todo los campos!")
+            Swal.fire({
+                title: 'Atencion!',
+                html: 'Falta completar con los trabajos a realizar.',
+                icon: 'error',
+                showCloseButton: true,
+                showCancelButton: false,
+                showConfirmButton: false
+            });
+            return false;
         }
     } else {
-        alert("completa todo los campos!")
+        Swal.fire({
+            title: 'Atencion!',
+            html: 'Falta completar el nombre del Cliente.',
+            icon: 'error',
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+        return false;
     }
 }
 
@@ -350,8 +397,6 @@ function mostrarListadoPresupuesto() {
         boton = document.getElementById("btnViewPres_" + element);
         boton.addEventListener("click", function () { mostrarPresupuesto(element) }, false);
     });
-
-
 }
 
 btnSearch.onclick = () => {
@@ -366,4 +411,7 @@ btnSearch.onclick = () => {
 
 selectRubroTable.onchange = () => {
     completarTable();
+}
+btnCancelarPresup.onclick = () => {
+    limpiarPresupuesto()
 }
