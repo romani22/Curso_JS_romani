@@ -256,7 +256,7 @@ function completarTable() {
         bodyTable += `<tr>
                         <td>${element.name}</td>
                         <td>${element.valorUni}</td>
-                        <td><button class="btn bt-sm btn-danger" id="${rubro}_${element.id}"><i class="fa fa-times"></i></button></td>
+                        <td><button class="btn bt-sm btn-danger" id="${rubro}_${element.id}"><i class="fa fa-trash"></i></button></td>
                     </tr>`;
         boton.push(rubro + "_" + element.id);
 
