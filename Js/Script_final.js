@@ -176,7 +176,7 @@ function mostrarListadoPresupuesto() {
                             <td>$ ${element.totalPresup}</td>
                             <td>
                                 <button class="btn bt-sm btn-primary" id="btnViewPres_${element.id}"><i class="fa fa-search"></i></button>
-                                <button class="btn bt-sm btn-danger" id="btnDeletePres_${element.id}"><i class="fa fa-search"></i></button>
+                                <button class="btn bt-sm btn-danger" id="btnDeletePres_${element.id}"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>`;
         boton.push(element.id);
