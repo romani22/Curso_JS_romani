@@ -15,10 +15,12 @@ let btnSavePresup = document.getElementById("btnSavePresup");
 let dicBtnsPrimary = document.getElementById("dicBtnsPrimary");
 let idNewWork = document.getElementById("idNewWork");
 let tableWork = document.getElementById("tableWork");
+let viewPres = document.getElementById("viewPres");
+let viewPresXId = document.getElementById("viewPresXId");
+
 let createItems = document.getElementById("createItems");
 let createPresup = document.getElementById("createPresup");
 let rubroPresupuesto = document.getElementById("rubroPresupuesto");
-
 let arraySelect = [];
 let workStorage = new Array();
 let cantStoragePresupuestos = localStorage.getItem("Presup");
@@ -48,11 +50,14 @@ btnEditWork.onclick = () => {
 btnNewItems.onclick = () => {
     mostrarView("createItems");
 }
+
 function mostrarView(name) {
     limpiarOcultarWorks();
     tableWork.classList.add("descartar");
     createItems.classList.add("descartar");
     createPresup.classList.add("descartar");
+    viewPres.classList.add("descartar")
+    viewPresXId.classList.add("descartar")
     document.getElementById(name).classList.remove("descartar");
 }
 function limpiarOcultarWorks() {
@@ -190,7 +195,7 @@ function addNewItemPres() {
                         <input type="text" disabled class="form-control" value="$ ${valorUniNew}" id="valorUni_pres_${cantItems}">
                     </div>
                     <div class="col">
-                        <input type="text" disabled value="$ ${valorCantNew}" class="form-control" id="CantWork_${cantItems}">
+                        <input type="text" disabled value="${valorCantNew}" class="form-control" id="CantWork_${cantItems}">
                     </div>
                     <div class="col">
                         <input type="text" disabled value="$ ${valTotal}" class="form-control" id="CantTotalWork_${cantItems}">
@@ -223,12 +228,13 @@ btnSavePresup.onclick = () => {
     if (name_presupuesto) {
         for (let i = 0; i < cantItems; i++) {
             let id_name = document.getElementById("select_val_" + i)?.value;
+            let name = document.getElementById("select_" + i)?.value;
             let rubro = document.getElementById("rubro_id_" + i)?.value;
             let valueUni = document.getElementById("valorUni_pres_" + i)?.value;
             let CantWork = document.getElementById("CantWork_" + i)?.value;
             let CantTotalWork = document.getElementById("CantTotalWork_" + i)?.value;
             if (id_name) {
-                itemsPresup.push({ "rubro": rubro, "id_name": id_name, "valueUni": valueUni, "CantWork": CantWork, "CantTotalWork": CantTotalWork });
+                itemsPresup.push({ "rubro": rubro, "id_name": id_name, "name": name, "valueUni": valueUni, "CantWork": CantWork, "CantTotalWork": CantTotalWork });
                 elem = CantTotalWork.split("$ ")
                 totalFinal = totalFinal + parseInt(elem[1]);
             }
@@ -262,7 +268,68 @@ function limpiarPresupuesto() {
 }
 
 function mostrarPresupuesto(id) {
+    document.getElementById("viewPres").classList.add("descartar");
+    document.getElementById("viewPresXId").classList.remove("descartar");
     Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
     presupuestoMostrar = Presupuesto.filter((item) => item.id == id)
-    console.log(presupuestoMostrar);
+    let divPresupuestoView = document.getElementById("divPresupuestoView");
+    let { name_presupuesto, items, totalPresup } = presupuestoMostrar[0];
+    document.getElementById("nameCustomerPres").innerText = name_presupuesto;
+    document.getElementById("totalPresView").value = "Total: $ " + totalPresup;
+    let itemsView = `<div class="d-flex">
+    <div class="col">
+        <h5 class="text-center">Trabajo</h5>
+    </div>
+    <div class="col">
+        <h5 class="text-center">Valor Por unidad</h5>
+    </div>
+    <div class="col">
+        <h5 class="text-center">Cantidad de trabajo</h5>
+    </div>
+    <div class="col">
+        <h5 class="text-center">Total por trabajo</h5>
+    </div>
+</div>`;
+    items?.forEach(element => {
+        itemsView += `<div class="d-flex">
+                    <div class="col">
+                        <p class="text-center">${element.name}</p>
+                    </div>
+                    <div class="col">
+                        <p class="text-center">${element.valueUni}</p>
+                    </div>
+                    <div class="col">
+                        <p class="text-center">${element.CantWork}</p>
+                    </div>
+                    <div class="col">
+                        <p class="text-center">${element.CantTotalWork}</p>
+                    </div>
+                </div>`;
+    });
+    divPresupuestoView.innerHTML = itemsView;
+}
+
+function mostrarListadoPresupuesto() {
+    Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
+    let tbodyPresup = document.getElementById("tbodyPresup");
+    let bodyTable = "";
+    let boton = new Array();
+    Presupuesto.forEach(element => {
+        bodyTable += `<tr>
+                        <td>${element.name_presupuesto}</td>
+                        <td>$ ${element.totalPresup}</td>
+                        <td><button class="btn bt-sm btn-primary" id="btnViewPres_${element.id}"><i class="fa fa-search"></i></button></td>
+                    </tr>`;
+        boton.push(element.id);
+    });
+    tbodyPresup.innerHTML = bodyTable;
+    boton.forEach(element => {
+        boton = document.getElementById("btnViewPres_" + element);
+        boton.addEventListener("click", function () { mostrarPresupuesto(element) }, false);
+    });
+}
+
+btnSearch.onclick = () => {
+    mostrarView("viewPres");
+    mostrarListadoPresupuesto();
 }

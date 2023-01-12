@@ -25,6 +25,7 @@
                 <button class="btn btn-primary ms-3" id="btnEditWork">Editar Trabajo Guardado</button>
                 <button class="btn btn-success ms-3" id="btnNew">Crear Presupuesto</button>
                 <button class="btn btn-danger ms-3" id="btnSearch">Buscar Presupuesto</button>
+
             </div>
 
             <div class="row justify-content-center descartar" id="createItems">
@@ -179,8 +180,36 @@
                 </div>
 
             </div>
+            <div class="row justify-content-center descartar" id="viewPres">
+                <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
+                    <h3 class="text-center">Lista de Presupuestos</h3>
+                    <table class="table table-bordered" cellspacing="0" width="100%">
+                        <thead class="table-dark table-bordered border-light">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Valor final</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyPresup" class="table-light  table-bordered border-dark">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center descartar" id="viewPresXId">
+                <div class="row justify-content-end col-10 mt-2 fondoItems pb-4">
+                    <h3 class="text-center">Presupuesto de <span id="nameCustomerPres"></span></h3>
+                    <div id="divPresupuestoView"></div>
+                    <div class="d-flex col">
+                        <input disabled class="form-control offset-9" type="text" id="totalPresView" value="0">
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
+
     <script src="Js/Script_final.js"></script>
 </body>
 
