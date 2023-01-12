@@ -461,7 +461,7 @@ function deleteStorage(elem) {
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     work_Id = elem[1];
     Swal.fire({
-        title: '¿desea eliminar este Trabajo? No se puede recuperar',
+        title: '¿Desea eliminar este Trabajo? No se puede recuperar',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sí',
