@@ -69,8 +69,9 @@ function limpiarOcultarWorks() {
     document.getElementById("createItems").classList.add("descartar");
 }
 function DeleteNewWork() {
-    document.getElementById("id_work_" + cantNewWork).remove()
-    cantNewWork--;
+    document.getElementById("idNewWork").innerHTML = "";
+    cantNewWork = -1;
+    addNewWork()
     if (cantNewWork == 0) {
         btnDeleteNewWork.classList.add("descartar");
     }
@@ -80,15 +81,20 @@ function addNewWork() {
     if (cantNewWork == 1) {
         btnDeleteNewWork.classList.remove("descartar");
     }
-    let item = `<div class="col-8 row" id="id_work_${cantNewWork}">
-                    <div class="col-6 mt-3">
-                        <input type="text" placeholder="Nombre del trabajo a realizar" class="form-control" id="nameWork_${cantNewWork}">
-                    </div>
-                    <div class="col-6 mt-3">
-                        <input type="number" placeholder="Valor por unidad del trabajo" class="form-control" id="valueUni_${cantNewWork}">
-                    </div>
+    let item = "";
+    for (let i = 0; i <= cantNewWork; i++) {
+        let name = document.getElementById("nameWork_" + i)?.value || "";
+        let Valor = document.getElementById("valueUni_" + i)?.value || "";
+
+        item += `<div class="col-6 mt-3">
+                    <input type="text" placeholder="Nombre del trabajo a realizar" class="form-control" id="nameWork_${i}" value="${name}">
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="number" placeholder="Valor por unidad del trabajo" class="form-control" id="valueUni_${i}" value="${Valor}">
                 </div>`;
-    idNewWork.innerHTML += item;
+    }
+
+    idNewWork.innerHTML = item;
 }
 btnCreateNewwork.onclick = () => {
     addNewWork();
