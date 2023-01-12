@@ -36,16 +36,27 @@ btnSaveNewWork.onclick = () => {
     saveWork();
 }
 btnNew.onclick = () => {
-    rubroPresupuesto.addEventListener('change', () => {
+    let rubro = document.getElementById("rubroPresupuesto").value;
+    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
+    if (workStorage.length > 0) {
+        rubroPresupuesto.addEventListener('change', () => {
+            completarSelect();
+        });
         completarSelect();
-    });
-    completarSelect();
-    mostrarView("createPresup");
-
+        mostrarView("createPresup");
+    } else {
+        alert("no existe Trabajo creado")
+    }
 }
 btnEditWork.onclick = () => {
-    mostrarView("tableWork");
-    completarTable();
+    let rubro = document.getElementById("rubroPresupuesto").value;
+    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
+    if (workStorage.length > 0) {
+        mostrarView("tableWork");
+        completarTable();
+    } else {
+        alert("no existe Trabajo creado")
+    }
 }
 btnNewItems.onclick = () => {
     mostrarView("createItems");
@@ -157,16 +168,20 @@ function completarSelect() {
     let rubro = document.getElementById("rubroPresupuesto").value;
     let select = document.getElementById("namesWork");
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    let options = "";
-    workStorage.forEach(element => {
-        options += `<option value="${element.id}">${element.name}</option>`;
-    });
-    select.innerHTML = options;
-    valorSelect(rubro, workStorage[0].id);
-    select.addEventListener('change', () => {
-        var selectedOption = select.options[select.selectedIndex];
-        valorSelect(rubro, selectedOption.value);
-    });
+    if (workStorage.length > 0) {
+        let options = "";
+        workStorage.forEach(element => {
+            options += `<option value="${element.id}">${element.name}</option>`;
+        });
+        select.innerHTML = options;
+        valorSelect(rubro, workStorage[0].id);
+        select.addEventListener('change', () => {
+            var selectedOption = select.options[select.selectedIndex];
+            valorSelect(rubro, selectedOption.value);
+        });
+    } else {
+        alert("no existe Trabajos Creados")
+    }
 }
 
 function valorSelect(rubro, selected) {
@@ -322,10 +337,10 @@ function mostrarListadoPresupuesto() {
     let boton = new Array();
     Presupuesto.forEach(element => {
         bodyTable += `<tr>
-                        <td>${element.name_presupuesto}</td>
-                        <td>$ ${element.totalPresup}</td>
-                        <td><button class="btn bt-sm btn-primary" id="btnViewPres_${element.id}"><i class="fa fa-search"></i></button></td>
-                    </tr>`;
+                            <td>${element.name_presupuesto}</td>
+                            <td>$ ${element.totalPresup}</td>
+                            <td><button class="btn bt-sm btn-primary" id="btnViewPres_${element.id}"><i class="fa fa-search"></i></button></td>
+                        </tr>`;
         boton.push(element.id);
     });
     tbodyPresup.innerHTML = bodyTable;
@@ -333,9 +348,16 @@ function mostrarListadoPresupuesto() {
         boton = document.getElementById("btnViewPres_" + element);
         boton.addEventListener("click", function () { mostrarPresupuesto(element) }, false);
     });
+
+
 }
 
 btnSearch.onclick = () => {
-    mostrarView("viewPres");
-    mostrarListadoPresupuesto();
+    Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
+    if (Presupuesto.length > 0) {
+        mostrarView("viewPres");
+        mostrarListadoPresupuesto();
+    } else {
+        alert("no existen Presupuestos");
+    }
 }
