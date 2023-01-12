@@ -47,7 +47,15 @@ btnNew.onclick = () => {
         completarSelect();
         mostrarView("createPresup");
     } else {
-        alert("no existe Trabajo creado")
+        Swal.fire({
+            title: 'Atencion!',
+            html: 'no existe Trabajo creado.',
+            icon: 'error',
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+        return false;
     }
 }
 btnEditWork.onclick = () => {
@@ -57,7 +65,15 @@ btnEditWork.onclick = () => {
         mostrarView("tableWork");
         completarTable();
     } else {
-        alert("no existe Trabajo creado")
+        Swal.fire({
+            title: 'Atencion!',
+            html: 'no existe Trabajo creado.',
+            icon: 'error',
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+        return false;
     }
 }
 btnNewItems.onclick = () => {
@@ -206,7 +222,16 @@ function completarSelect() {
             valorSelect(rubro, selectedOption.value);
         });
     } else {
-        alert("no existe Trabajos Creados")
+        Swal.fire({
+            title: 'Atencion!',
+            html: 'no existe Trabajos Creados.',
+            icon: 'error',
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+        return false;
+
     }
 }
 
@@ -405,7 +430,15 @@ btnSearch.onclick = () => {
         mostrarView("viewPres");
         mostrarListadoPresupuesto();
     } else {
-        alert("no existen Presupuestos");
+        Swal.fire({
+            title: 'Atencion!',
+            html: 'no existen Presupuestos.',
+            icon: 'error',
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+        return false;
     }
 }
 
