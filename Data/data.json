@@ -1,0 +1,240 @@
+{
+   "Works": [
+      {
+         "Albanileria": [
+            {
+               "id": 0,
+               "name": "Excavación de Cimiento",
+               "unidad": "m3",
+               "dataBase": "json",
+               "status": 0,
+               "valorUni": "250"
+            },
+            {
+               "id": 1,
+               "name": "Cimiento",
+               "unidad": "m3",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "450"
+            },
+            {
+               "id": 2,
+               "name": "Encadenado de Cimiento",
+               "unidad": "ml",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "350"
+            },
+            {
+               "id": 3,
+               "name": "Mamposteria de Cimiento",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 0,
+               "valorUni": "500"
+            },
+            {
+               "id": 4,
+               "name": "Capa Aisladora",
+               "unidad": "ml",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "250"
+            },
+            {
+               "id": 5,
+               "name": "Mamposteria de Elevación",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "500"
+            },
+            {
+               "id": 6,
+               "name": "Encadenado Superior",
+               "unidad": "ml",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "250"
+            },
+            {
+               "id": 7,
+               "name": "Columnas",
+               "unidad": "ml",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "450"
+            },
+            {
+               "id": 8,
+               "name": "Losa Armada",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "1650"
+            },
+            {
+               "id": 9,
+               "name": "Cubierta de techo",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "250"
+            },
+            {
+               "id": 10,
+               "name": "Base de Tanque",
+               "unidad": "Uni",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "350"
+            },
+            {
+               "id": 11,
+               "name": "Colocacion de Aberturas",
+               "unidad": "Uni",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "2500"
+            },
+            {
+               "id": 12,
+               "name": "Colocacion de Revestimiento",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "980"
+            },
+            {
+               "id": 13,
+               "name": "Colocación de Piso",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "650"
+            },
+            {
+               "id": 14,
+               "name": "Veredas Perimetrales",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "750"
+            },
+            {
+               "id": 15,
+               "name": "Pilar de Luz",
+               "unidad": "Uni",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "550"
+            }
+         ]
+      },
+      {
+         "Plomeria": [
+            {
+               "id": 0,
+               "name": "Conexión a Red de Agua",
+               "unidad": "Uni",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "4500"
+            },
+            {
+               "id": 1,
+               "name": "Instalacion de Tanque de agua",
+               "unidad": "Uni",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "1500"
+            },
+            {
+               "id": 2,
+               "name": "Conexión a la Red Cloacal",
+               "unidad": "Uni",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "3500"
+            }
+         ]
+      },
+      {
+         "Electricidad": [
+            {
+               "id": 0,
+               "name": "Armado de Pilar de Luz",
+               "unidad": "Uni",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "5500"
+            },
+            {
+               "id": 1,
+               "name": "Instalacion de Bocas de luz",
+               "unidad": "Boca",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "500"
+            }
+         ]
+      },
+      {
+         "Pintura": [
+            {
+               "id": 0,
+               "name": "Pintura Exterior",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "650"
+            },
+            {
+               "id": 1,
+               "name": "Pintura Interior",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "650"
+            },
+            {
+               "id": 2,
+               "name": "Pintura Cielorraso",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "550"
+            },
+            {
+               "id": 3,
+               "name": "Pintura de Aberturas",
+               "unidad": "Uni",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "3500"
+            },
+            {
+               "id": 4,
+               "name": "Pintura Impermeable de Techo",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "750"
+            }
+         ]
+      },
+      {
+         "Servicios": [
+            {
+               "id": 0,
+               "name": "Diseño y Planimetria",
+               "unidad": "m2",
+               "dataBase": "json",
+               "status": 1,
+               "valorUni": "1500"
+            }
+         ]
+      }
+   ]
+}

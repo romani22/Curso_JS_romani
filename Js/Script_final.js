@@ -11,7 +11,8 @@ let btnAddItem = document.getElementById("addItem");
 let btnCancelarPresup = document.getElementById("btnCancelarPresup");
 let btnSavePresup = document.getElementById("btnSavePresup");
 let btnsPresupuesto = new Array();
-
+let DataBase = new Array();
+let DataComnplete = new Array();
 
 //Elementos de view por id
 let idNewWork = document.getElementById("idNewWork");
@@ -38,9 +39,8 @@ btnSaveNewWork.onclick = () => {
     saveWork();
 }
 btnNew.onclick = () => {
-    let rubro = document.getElementById("rubroPresupuesto").value;
-    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    if (workStorage.length > 0) {
+    UploadDataBase()
+    if (DataComnplete.length > 0) {
         rubroPresupuesto.addEventListener('change', () => {
             completarSelect();
         });
@@ -59,9 +59,8 @@ btnNew.onclick = () => {
     }
 }
 btnEditWork.onclick = () => {
-    let rubro = document.getElementById("rubroPresupuesto").value;
-    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    if (workStorage.length > 0) {
+    UploadDataBase()
+    if (DataComnplete.length > 0) {
         mostrarView("tableWork");
         completarTable();
     } else {
@@ -77,6 +76,7 @@ btnEditWork.onclick = () => {
     }
 }
 btnNewItems.onclick = () => {
+    btnCreateNewwork.classList.remove("descartar");
     mostrarView("createItems");
 }
 btnCreateNewwork.onclick = () => {
@@ -199,12 +199,15 @@ function addNewWork() {
     let item = "";
     for (let i = 0; i <= cantNewWork; i++) {
         let name = document.getElementById("nameWork_" + i)?.value || "";
+        let Unidad = document.getElementById("uniWork_" + i)?.value || "";
         let Valor = document.getElementById("valueUni_" + i)?.value || "";
-
-        item += `<div class="col-6 mt-3">
+        item += `<div class="col-4 mt-3">
                     <input type="text" placeholder="Nombre del trabajo a realizar" class="form-control" id="nameWork_${i}" value="${name}">
                 </div>
-                <div class="col-6 mt-3">
+                <div class="col-4 mt-3">
+                    <input type="text" placeholder="Unidad del trabajo a realizar" class="form-control" id="uniWork_${i}" value="${Unidad}">
+                </div>
+                <div class="col-4 mt-3">
                     <input type="number" placeholder="Valor por unidad del trabajo" class="form-control" id="valueUni_${i}" value="${Valor}">
                 </div>`;
     }
@@ -248,37 +251,49 @@ function addNewItemPres() {
 }
 function completarTable() {
     let rubro = document.getElementById("rubrosTableWork").value;
-    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
+    let works = new Array();
+    DataBase?.forEach(elRubro => {
+        nameRubro = Object.keys(elRubro)[0];
+        if (nameRubro == rubro) {
+            works = elRubro[nameRubro]
+        }
+    })
+    // workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     let tbodyWorks = document.getElementById("tbodyWorks");
     let bodyTable = "";
     let boton = new Array();
-    workStorage.forEach(element => {
+    works.forEach(element => {
         bodyTable += `<tr>
-                        <td>${element.name}</td>
-                        <td>${element.valorUni}</td>
-                        <td><button class="btn bt-sm btn-danger" id="${rubro}_${element.id}"><i class="fa fa-trash"></i></button></td>
-                    </tr>`;
+            <td>${element.name}</td>
+            <td>${element.unidad}</td>
+            <td>${element.valorUni}</td>
+            <td><button class="btn bt-sm btn-warning text-white" id="${rubro}_${element.id}"><i class="fa fa-pencil"></i></button></td>
+        </tr>`;
         boton.push(rubro + "_" + element.id);
-
     });
 
     tbodyWorks.innerHTML = bodyTable;
     boton.forEach(element => {
         boton = document.getElementById(element);
-        boton.addEventListener("click", function () { deleteStorage(element) }, false);
+        boton.addEventListener("click", function () { changeWork(element) }, false);
     });
 }
 function completarSelect() {
     let rubro = document.getElementById("rubroPresupuesto").value;
     let select = document.getElementById("namesWork");
-    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    if (workStorage.length > 0) {
+    UploadDataBase()
+    if (DataComnplete.length > 0) {
         let options = "";
-        workStorage.forEach(element => {
-            options += `<option value="${element.id}">${element.name}</option>`;
+        DataComnplete?.forEach(elDataBase => {
+            nameRubro = Object.keys(elDataBase)[0];
+            if (nameRubro == rubro) {
+                elDataBase[nameRubro]?.forEach(element => {
+                    options += `<option value="${element.id}">${element.name}</option>`;
+                })
+            }
         });
         select.innerHTML = options;
-        valorSelect(rubro, workStorage[0].id);
+        valorSelect(rubro, DataComnplete[0]["Albanileria"][0].id);
         select.addEventListener('change', () => {
             var selectedOption = select.options[select.selectedIndex];
             valorSelect(rubro, selectedOption.value);
@@ -298,6 +313,23 @@ function completarSelect() {
 }
 function valorSelect(rubro, selected) {
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
+    if (workStorage.length <= 0) {
+        DataComnplete?.forEach(elRubro => {
+            nameRubro = Object.keys(elRubro)[0];
+            WorksDateBase = elRubro;
+            if (nameRubro == rubro) {
+                WorksDateBase[nameRubro].forEach(el => {
+                    if (el.id == selected) {
+                        workStorage.push(el)
+                    }
+                    return workStorage;
+                })
+            }
+
+        });
+    } else {
+        workStorage = workStorage.filter((item) => item.id == selected) || new Array();
+    }
     Valor = workStorage.filter((item) => item.id == selected)
     document.getElementById("valueUni").value = Valor[0].valorUni;
 }
@@ -362,16 +394,68 @@ function savePresup() {
 function saveWork() {
     let rubro = document.getElementById("rubrosNewWork").value;
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    let id = workStorage?.length || 0;
-    let idControl = id;
-    for (let i = 0; i <= cantNewWork; i++) {
-        let nameNewWork = document.getElementById("nameWork_" + i).value || "";
-        let valorNewWork = document.getElementById("valueUni_" + i).value || "";
-        if (nameNewWork != "" && valorNewWork != "") {
-            workStorage[id] = { "id": id, "name": nameNewWork, "valorUni": valorNewWork };
+    let id_work = parseInt(document.getElementById("id_work").value);
+    let idControl = ""
+    let id = ""
+    if (id_work == "") {
+        id = workStorage?.length || 0;
+        if (id > 0) {
+            ubic = id - 1;
+            id = workStorage[ubic].id;
             id++;
-            newWorkJSON = JSON.stringify(workStorage);
-            localStorage.setItem(rubro, newWorkJSON);
+        }
+        DataComnplete?.forEach(elRubro => {
+            nameRubro = Object.keys(elRubro)[0];
+            if (nameRubro == rubro) {
+                if (id < elRubro[nameRubro].length) {
+                    id = elRubro[nameRubro].length;
+                }
+            }
+        })
+
+        idControl = id;
+        for (let i = 0; i <= cantNewWork; i++) {
+            let nameNewWork = document.getElementById("nameWork_" + i).value || "";
+            let uniNewWork = document.getElementById("uniWork_" + i).value || "";
+            let valorNewWork = document.getElementById("valueUni_" + i).value || "";
+            if (nameNewWork != "" && valorNewWork != "" && uniNewWork != "") {
+                workStorage.push({ "id": id, "name": nameNewWork, "unidad": uniNewWork, "dataBase": "storage", "status": 1, "valorUni": valorNewWork });
+                id++;
+                newWorkJSON = JSON.stringify(workStorage);
+                localStorage.setItem(rubro, newWorkJSON);
+            }
+        }
+    } else {
+        id = id_work;
+        idControl = id;
+        let nameNewWork = document.getElementById("nameWork_0").value
+        let uniNewWork = document.getElementById("uniWork_0").value
+        let valorNewWork = document.getElementById("valueUni_0").value
+        if (nameNewWork != "" && valorNewWork != "" && uniNewWork != "") {
+            let paso = false;
+            workStorage.map(function (dato) {
+                if (dato.id == id) {
+                    paso = true;
+                    dato.name = nameNewWork;
+                    dato.unidad = uniNewWork;
+                    dato.dataBase = "storage";
+                    dato.valorUni = valorNewWork;
+                    id++;
+                }
+                return dato;
+            })
+            if (paso == true) {
+                id++;
+                newWorkJSON = JSON.stringify(workStorage);
+                localStorage.setItem(rubro, newWorkJSON);
+                document.getElementById("id_work").value = "";
+            } else {
+                workStorage.push({ "id": id, "name": nameNewWork, "unidad": uniNewWork, "dataBase": "storage", "status": 1, "valorUni": valorNewWork });
+                id++;
+                newWorkJSON = JSON.stringify(workStorage);
+                localStorage.setItem(rubro, newWorkJSON);
+                document.getElementById("id_work").value = "";
+            }
         }
     }
     if (idControl < id) {
@@ -383,6 +467,7 @@ function saveWork() {
             showCancelButton: false,
             showConfirmButton: false
         });
+        UploadDataBase()
         limpiarOcultarWorks();
     } else {
         Swal.fire({
@@ -425,6 +510,7 @@ function limpiarOcultarWorks() {
         DeleteNewWork();
     }
     document.getElementById("nameWork_0").value = "";
+    document.getElementById("uniWork_0").value = "";
     document.getElementById("valueUni_0").value = "";
     document.getElementById("createItems").classList.add("descartar");
 }
@@ -449,11 +535,33 @@ function deletePresStorage(id) {
 }
 function DeleteNewWork() {
     document.getElementById("idNewWork").innerHTML = "";
-    cantNewWork = -1;
-    addNewWork()
-    if (cantNewWork == 0) {
+    cantNewWork = cantNewWork - 2;
+    addNewWork();
+    if (cantNewWork <= 0) {
         btnDeleteNewWork.classList.add("descartar");
     }
+}
+
+function changeWork(elem) {
+    elem2 = elem.split("_")
+    rubro = elem2[0]
+    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array()
+    work_Id = elem2[1]
+    Swal.fire({
+        title: '¿Que Desea hacer con este Trabajo?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Editar',
+        denyButtonText: `Eliminar`,
+        allowOutsideClick: false,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            EditeWork(elem)
+        } else {
+            deleteStorage(elem)
+
+        }
+    })
 }
 function deleteStorage(elem) {
     elem = elem.split("_")
@@ -461,7 +569,7 @@ function deleteStorage(elem) {
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     work_Id = elem[1];
     Swal.fire({
-        title: '¿Desea eliminar este Trabajo? No se puede recuperar',
+        title: '¿Desea eliminar/reestablecer de fabrica este Trabajo? No se puede recuperar',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sí',
@@ -469,10 +577,102 @@ function deleteStorage(elem) {
         allowOutsideClick: false,
     }).then((result) => {
         if (result.isConfirmed) {
-            workStorage = workStorage.filter((item) => item.id != work_Id)
-            newWorkJSON = JSON.stringify(workStorage);
-            localStorage.setItem(rubro, newWorkJSON);
-            completarTable();
+            workStorage = workStorage.filter((item) => item.id == work_Id)
+            if (workStorage.length > 0) {
+                workStorage = workStorage.filter((item) => item.id != work_Id)
+                newWorkJSON = JSON.stringify(workStorage);
+                localStorage.setItem(rubro, newWorkJSON);
+                UploadDataBase()
+                setTimeout(completarTable, 200)
+            } else {
+                Swal.fire({
+                    title: 'Atencion!',
+                    html: 'No se puede eliminar este trabajo ya que es un predefinido en la aplicación.',
+                    icon: 'error',
+                    showCloseButton: true,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                });
+                return false;
+            }
+
         }
     })
 }
+function EditeWork(elem) {
+    elem = elem.split("_")
+    rubro = elem[0];
+    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
+    work_Id = elem[1];
+    Swal.fire({
+        title: '¿Desea editar este Trabajo?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Sí',
+        denyButtonText: `No`,
+        allowOutsideClick: false,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            jobSave = workStorage.filter((item) => item.id == work_Id) || new Array();
+            if (jobSave.length <= 0) {
+                DataComnplete?.forEach(elRubro => {
+                    nameRubro = Object.keys(elRubro)[0];
+                    WorksDateBase = elRubro;
+                    if (nameRubro == rubro) {
+                        WorksDateBase[nameRubro].forEach(el => {
+                            if (el.id == work_Id) {
+                                jobSave.push(el)
+                            }
+                            return jobSave;
+                        })
+                    }
+
+                });
+            }
+            mostrarView("createItems")
+            document.getElementById("rubrosNewWork").value = rubro;
+            document.getElementById("nameWork_0").value = jobSave[0].name
+            document.getElementById("uniWork_0").value = jobSave[0].unidad
+            document.getElementById("valueUni_0").value = jobSave[0].valorUni
+            document.getElementById("id_work").value = jobSave[0].id
+            btnCreateNewwork.classList.add("descartar")
+        }
+    })
+}
+
+function UploadDataBase() {
+    let WorksDateBase = new Array();
+    fetch('./Data/data.json')
+        .then(res => res.json())
+        .then(datos => {
+            DataComnplete = new Array();
+            DataBase = datos.Works;
+            DataBase?.forEach(elRubro => {
+                nameRubro = Object.keys(elRubro)[0];
+                WorksDateBase = elRubro;
+                workStorage = JSON.parse(localStorage.getItem(nameRubro)) || "";
+                if (workStorage != "") {
+                    workStorage?.forEach(el => {
+                        let paso = false;
+                        WorksDateBase[nameRubro].map(function (dato) {
+                            if (dato.id == parseInt(el.id)) {
+                                paso = true;
+                                dato.id = el.id;
+                                dato.name = el.name;
+                                dato.unidad = el.unidad;
+                                dato.dataBase = el.dataBase;
+                                dato.valorUni = el.valorUni;
+                            }
+                            return dato;
+                        })
+                        if (paso == false) {
+                            WorksDateBase[nameRubro].push(el)
+                        }
+                    })
+                }
+                WorksDateBase[nameRubro] = WorksDateBase[nameRubro].filter((item) => item.status == 1)
+                DataComnplete.push(WorksDateBase);
+            });
+        })
+}
+UploadDataBase();

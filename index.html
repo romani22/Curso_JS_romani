@@ -52,20 +52,28 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-8 row">
-                                <div class="col-6">
-                                    <label for="nameWork">Nombre del trabajo</label>
+                                <div class="col-4">
+                                    <label for="nameWork">Nombre del Trabajo</label>
                                 </div>
-                                <div class="col-6">
-                                    <label for="valueUni">Valor por unidad</label>
+                                <div class="col-4">
+                                    <label for="valueUni">Unidad de Trabajo</label>
+                                </div>
+                                <div class="col-4">
+                                    <label for="valueUni">Valor por Unidad</label>
                                 </div>
                             </div>
 
                             <div class="col-8 row" id="idNewWork">
-                                <div class="col-6 mt-3">
+                                <div class="col-4 mt-3">
+                                    <input type="hidden" class="form-control" id="id_work" value="">
                                     <input type="text" placeholder="Nombre del trabajo a realizar" class="form-control"
                                         id="nameWork_0" value="">
                                 </div>
-                                <div class="col-6 mt-3">
+                                <div class="col-4 mt-3">
+                                    <input type="text" placeholder="Unidad del trabajo a realizar" class="form-control"
+                                        id="uniWork_0" value="">
+                                </div>
+                                <div class="col-4 mt-3">
                                     <input type="number" placeholder="Valor por unidad del trabajo" class="form-control"
                                         id="valueUni_0" value="">
                                 </div>
@@ -101,7 +109,8 @@
                             <thead class="table-dark table-bordered border-light">
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Valor por unidad</th>
+                                    <th>Unidad</th>
+                                    <th>Valor</th>
                                     <th></th>
                                 </tr>
                             </thead>
