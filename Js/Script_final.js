@@ -11,6 +11,8 @@ let btnAddItem = document.getElementById("addItem");
 let btnCancelarPresup = document.getElementById("btnCancelarPresup");
 let btnSavePresup = document.getElementById("btnSavePresup");
 let btnsPresupuesto = new Array();
+
+//Array para datos de JSON
 let DataBase = new Array();
 let DataComnplete = new Array();
 
@@ -35,9 +37,11 @@ let cantItems = 0;
 btnCleanNewWork.onclick = () => {
     limpiarOcultarWorks();
 }
+
 btnSaveNewWork.onclick = () => {
     saveWork();
 }
+
 btnNew.onclick = () => {
     UploadDataBase()
     if (DataComnplete.length > 0) {
@@ -58,6 +62,7 @@ btnNew.onclick = () => {
         return false;
     }
 }
+
 btnEditWork.onclick = () => {
     UploadDataBase()
     if (DataComnplete.length > 0) {
@@ -75,22 +80,28 @@ btnEditWork.onclick = () => {
         return false;
     }
 }
+
 btnNewItems.onclick = () => {
     btnCreateNewwork.classList.remove("descartar");
     mostrarView("createItems");
 }
+
 btnCreateNewwork.onclick = () => {
     addNewWork();
 }
+
 btnDeleteNewWork.onclick = () => {
     DeleteNewWork();
 }
+
 btnAddItem.onclick = () => {
     addNewItemPres();
 }
+
 btnSavePresup.onclick = () => {
     savePresup()
 }
+
 btnSearch.onclick = () => {
     Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
     if (Presupuesto.length > 0) {
@@ -108,9 +119,11 @@ btnSearch.onclick = () => {
         return false;
     }
 }
+
 selectRubroTable.onchange = () => {
     completarTable();
 }
+
 btnCancelarPresup.onclick = () => {
     limpiarPresupuesto()
 }
@@ -124,6 +137,7 @@ function mostrarView(name) {
     viewPresXId.classList.add("descartar")
     document.getElementById(name).classList.remove("descartar");
 }
+
 function mostrarPresupuesto(id) {
     document.getElementById("viewPres").classList.add("descartar");
     document.getElementById("viewPresXId").classList.remove("descartar");
@@ -165,6 +179,7 @@ function mostrarPresupuesto(id) {
     });
     divPresupuestoView.innerHTML = itemsView;
 }
+
 function mostrarListadoPresupuesto() {
     Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
     let tbodyPresup = document.getElementById("tbodyPresup");
@@ -190,7 +205,6 @@ function mostrarListadoPresupuesto() {
     });
 }
 
-
 function addNewWork() {
     cantNewWork++;
     if (cantNewWork == 1) {
@@ -214,6 +228,7 @@ function addNewWork() {
 
     idNewWork.innerHTML = item;
 }
+
 function addNewItemPres() {
     let itemsPresupuesto = document.getElementById("id_item");
     let valorUniNew = document.getElementById("valueUni").value;
@@ -266,6 +281,7 @@ function addNewItemPres() {
         return false;
     }
 }
+
 function completarTable() {
     let rubro = document.getElementById("rubrosTableWork").value;
     let works = new Array();
@@ -275,7 +291,6 @@ function completarTable() {
             works = elRubro[nameRubro]
         }
     })
-    // workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     let tbodyWorks = document.getElementById("tbodyWorks");
     let bodyTable = "";
     let boton = new Array();
@@ -295,6 +310,7 @@ function completarTable() {
         boton.addEventListener("click", function () { changeWork(element) }, false);
     });
 }
+
 function completarSelect() {
     let rubro = document.getElementById("rubroPresupuesto").value;
     let select = document.getElementById("namesWork");
@@ -328,6 +344,7 @@ function completarSelect() {
 
     }
 }
+
 function valorSelect(rubro, selected) {
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     if (workStorage.length <= 0) {
@@ -351,6 +368,7 @@ function valorSelect(rubro, selected) {
     document.getElementById("unidad").value = Valor[0].unidad;
     document.getElementById("valueUni").value = Valor[0].valorUni;
 }
+
 function savePresup() {
     let itemsPresup = Array();
     let totalFinal = 0;
@@ -409,6 +427,7 @@ function savePresup() {
         return false;
     }
 }
+
 function saveWork() {
     let rubro = document.getElementById("rubrosNewWork").value;
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
@@ -501,6 +520,7 @@ function saveWork() {
 
 
 }
+
 function activarBotones() {
     btnsPresupuesto.forEach(element => {
         let boton = document.getElementById(element.id);
@@ -513,6 +533,7 @@ function activarBotones() {
     });
 
 }
+
 function limpiarPresupuesto() {
     for (let i = cantItems; i >= 0; i--) {
         let div = document.getElementById("item_" + i);
@@ -523,6 +544,7 @@ function limpiarPresupuesto() {
     cantItems = 0;
     document.getElementById("createPresup").classList.add("descartar");
 }
+
 function limpiarOcultarWorks() {
     for (let i = cantNewWork; i > 0; i--) {
         DeleteNewWork();
@@ -532,6 +554,7 @@ function limpiarOcultarWorks() {
     document.getElementById("valueUni_0").value = "";
     document.getElementById("createItems").classList.add("descartar");
 }
+
 function deletePresStorage(id) {
     Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
     Swal.fire({
@@ -551,6 +574,7 @@ function deletePresStorage(id) {
     })
 
 }
+
 function DeleteNewWork() {
     document.getElementById("idNewWork").innerHTML = "";
     cantNewWork = cantNewWork - 2;
@@ -581,6 +605,7 @@ function changeWork(elem) {
         }
     })
 }
+
 function deleteStorage(elem) {
     elem = elem.split("_")
     rubro = elem[0];
@@ -617,6 +642,8 @@ function deleteStorage(elem) {
         }
     })
 }
+
+
 function EditeWork(elem) {
     elem = elem.split("_")
     rubro = elem[0];
@@ -658,6 +685,7 @@ function EditeWork(elem) {
     })
 }
 
+//obtencion de datos del archivo JSON 
 function UploadDataBase() {
     let WorksDateBase = new Array();
     fetch('./Data/data.json')
