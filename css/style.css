@@ -6,6 +6,7 @@
 
 .fondoCard {
     background: #4a4a4aab;
+    width: 75% !important;
 }
 
 .fondoItems {
@@ -19,6 +20,19 @@
 .descartar {
     display: none !important;
 }
+
+@media (max-width: 900px) {
+    .descartarCelular {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .fondoCard {
+        width: 100% !important;
+    }
+}
+
 
 .logoHome {
     max-width: 15vw;

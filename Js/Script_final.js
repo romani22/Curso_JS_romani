@@ -250,10 +250,10 @@ function addNewItemPres() {
                         <input type="hidden" disabled class="form-control" value="${rubroPresupuesto}" id="rubro_id_${cantItems}">
                         <input type="text" disabled class="form-control" value="${textSelectNew}" id="select_${cantItems}">
                     </div>
-                    <div class="col">
+                    <div class="col descartarCelular">
                         <input type="text" disabled class="form-control" value="$ ${unidad}" id="unidad_pres_${cantItems}">
                     </div> 
-                    <div class="col">
+                    <div class="col descartarCelular">
                         <input type="text" disabled class="form-control" value="$ ${valorUniNew}" id="valorUni_pres_${cantItems}">
                     </div>
                     <div class="col">
