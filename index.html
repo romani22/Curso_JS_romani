@@ -12,19 +12,38 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Document</title>
+    <!-- FavIcon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="./assets/img/fav_icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./assets/img/fav_icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./assets/img/fav_icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/fav_icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./assets/img/fav_icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./assets/img/fav_icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./assets/img/fav_icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./assets/img/fav_icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/fav_icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/img/fav_icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/fav_icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./assets/img/fav_icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/fav_icon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/img/fav_icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>PRESUPUESTOS - Home</title>
 </head>
 
 <body class="fondoPage">
     <div class="d-flex justify-content-center mt-3">
         <div class="w-75 fondoCard text-white p-3">
-            <h1 class="text-center">Presupuesto Constructivos...</h1>
-            <h2 class="text-center">Hola Bienvenido/a!</h2>
-            <div class="d-flex justify-content-center mb-3" id="dicBtnsPrimary">
-                <button class="btn btn-warning" id="btnNewItems">Crear Trabajo</button>
-                <button class="btn btn-primary ms-3" id="btnEditWork">Eliminar Trabajo</button>
-                <button class="btn btn-success ms-3" id="btnNew">Crear Presupuesto</button>
-                <button class="btn btn-danger ms-3" id="btnSearch">Buscar Presupuesto</button>
+            <img src="./assets/img/LogoBlanco.png" class="logoHome" alt="Logo App">
+            <p class="text-center tituloHome">Presupuestos Constructivos...</p>
+            <p class="text-center subTituloHome">Hola Bienvenido/a!</p>
+            <div class="row justify-content-center " id="dicBtnsPrimary">
+                <button class="btn btn-warning ms-3 mb-2 col-sm col-5" id="btnNewItems">Crear Trabajo</button>
+                <button class="btn btn-primary ms-3 mb-2 col-sm col-5" id="btnEditWork">Eliminar Trabajo</button>
+                <button class="btn btn-success ms-3 mb-2 col-sm col-5" id="btnNew">Crear Presupuesto</button>
+                <button class="btn btn-danger ms-3 mb-2 col-sm col-5" id="btnSearch">Buscar Presupuesto</button>
             </div>
             <div class="row justify-content-center descartar" id="createItems">
                 <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
@@ -51,7 +70,7 @@
 
                         </div>
                         <div class="row justify-content-center">
-                            <div class="col-8 row">
+                            <div class="col-12 row">
                                 <div class="col-4">
                                     <label for="nameWork">Nombre del Trabajo</label>
                                 </div>
@@ -63,7 +82,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-8 row" id="idNewWork">
+                            <div class="col-12 row" id="idNewWork">
                                 <div class="col-4 mt-3">
                                     <input type="hidden" class="form-control" id="id_work" value="">
                                     <input type="text" placeholder="Nombre del trabajo a realizar" class="form-control"
@@ -146,6 +165,10 @@
                             <select name="namesWork" class="form-control" id="namesWork"></select>
                         </div>
                         <div class="col">
+                            <label for="valueUni">unidad</label>
+                            <input type="text" disabled value="0" class="form-control" id="unidad">
+                        </div>
+                        <div class="col">
                             <label for="valueUni">Valor por unidad</label>
                             <input type="number" disabled value="0" class="form-control" id="valueUni">
                         </div>
@@ -170,6 +193,9 @@
                                 </div>
                                 <div class="col">
                                     <label for="nameWork">Nombre del trabajo</label>
+                                </div>
+                                <div class="col">
+                                    <label for="unidad">Unidad</label>
                                 </div>
                                 <div class="col">
                                     <label for="valueUni">Valor por unidad</label>

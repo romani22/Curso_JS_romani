@@ -217,14 +217,16 @@ function addNewWork() {
 function addNewItemPres() {
     let itemsPresupuesto = document.getElementById("id_item");
     let valorUniNew = document.getElementById("valueUni").value;
+    let unidad = document.getElementById("unidad").value;
     let select = document.getElementById("namesWork");
     let opcionSeleccionada = select.options[select.selectedIndex];
     let valorSelectNew = opcionSeleccionada.value;
     let textSelectNew = opcionSeleccionada.text;
     let valorCantNew = document.getElementById("CantWork").value;
-    let rubroPresupuesto = document.getElementById("rubroPresupuesto").value;
-    let valTotal = valorCantNew * valorUniNew;
-    let item = `<div class="d-flex" id="item_${cantItems}">
+    if (valorCantNew != "") {
+        let rubroPresupuesto = document.getElementById("rubroPresupuesto").value;
+        let valTotal = valorCantNew * valorUniNew;
+        let item = `<div class="d-flex" id="item_${cantItems}">
                     <div class="col-1">
                         <button class="btn btn-sm btn-danger" id="deleteItem_${cantItems}"><i class="fa fa-minus text-light" aria-hidden="true"></i></button>
                     </div>
@@ -233,6 +235,9 @@ function addNewItemPres() {
                         <input type="hidden" disabled class="form-control" value="${rubroPresupuesto}" id="rubro_id_${cantItems}">
                         <input type="text" disabled class="form-control" value="${textSelectNew}" id="select_${cantItems}">
                     </div>
+                    <div class="col">
+                        <input type="text" disabled class="form-control" value="$ ${unidad}" id="unidad_pres_${cantItems}">
+                    </div> 
                     <div class="col">
                         <input type="text" disabled class="form-control" value="$ ${valorUniNew}" id="valorUni_pres_${cantItems}">
                     </div>
@@ -243,11 +248,23 @@ function addNewItemPres() {
                         <input type="text" disabled value="$ ${valTotal}" class="form-control" id="CantTotalWork_${cantItems}">
                     </div>
                 </div>`;
-    itemsPresupuesto.innerHTML += item;
-    let newBoton = document.getElementById("deleteItem_" + cantItems);
-    btnsPresupuesto.push(newBoton);
-    activarBotones()
-    cantItems++;
+        itemsPresupuesto.innerHTML += item;
+        let newBoton = document.getElementById("deleteItem_" + cantItems);
+        btnsPresupuesto.push(newBoton);
+        activarBotones()
+        document.getElementById("CantWork").value = "";
+        cantItems++;
+    } else {
+        Swal.fire({
+            title: 'Atencion!',
+            html: 'Falta completar la cantidad de trabajo a realizar.',
+            icon: 'error',
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+        return false;
+    }
 }
 function completarTable() {
     let rubro = document.getElementById("rubrosTableWork").value;
@@ -331,6 +348,7 @@ function valorSelect(rubro, selected) {
         workStorage = workStorage.filter((item) => item.id == selected) || new Array();
     }
     Valor = workStorage.filter((item) => item.id == selected)
+    document.getElementById("unidad").value = Valor[0].unidad;
     document.getElementById("valueUni").value = Valor[0].valorUni;
 }
 function savePresup() {

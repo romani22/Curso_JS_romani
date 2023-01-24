@@ -19,3 +19,20 @@
 .descartar {
     display: none !important;
 }
+
+.logoHome {
+    max-width: 15vw;
+    max-height: 50px;
+    position: absolute;
+}
+
+.subTituloHome {
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.tituloHome {
+    font-size: 2.5vw;
+    font-weight: bold;
+    margin: 0;
+}
