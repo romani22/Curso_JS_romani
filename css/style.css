@@ -21,24 +21,12 @@
     display: none !important;
 }
 
-@media (max-width: 900px) {
-    .descartarCelular {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .fondoCard {
-        width: 100% !important;
-    }
-}
-
-
 .logoHome {
     max-width: 15vw;
     max-height: 50px;
     position: absolute;
 }
+
 
 .subTituloHome {
     font-size: 2vw;
@@ -49,4 +37,36 @@
     font-size: 2.5vw;
     font-weight: bold;
     margin: 0;
+}
+
+@media (max-width: 900px) {
+    .descartarCelular {
+        display: none;
+    }
+
+    .divlogoHome {
+        display: flex !important;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .logoHome {
+        max-width: 60vw !important;
+        max-height: 50px !important;
+        position: relative !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .fondoCard {
+        width: 100% !important;
+    }
+
+    .subTituloHome {
+        font-size: 3vw;
+    }
+
+    .tituloHome {
+        font-size: 4vw;
+    }
 }

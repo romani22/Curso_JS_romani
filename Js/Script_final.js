@@ -149,31 +149,31 @@ function mostrarPresupuesto(id) {
     document.getElementById("totalPresView").value = "Total: $ " + totalPresup;
     let itemsView = `<div class="d-flex">
     <div class="col">
-        <h5 class="text-center">Trabajo</h5>
+        <h5 class="text-center subTituloHome">Trabajo</h5>
     </div>
     <div class="col">
-        <h5 class="text-center">Valor Por unidad</h5>
+        <h5 class="text-center subTituloHome">Valor Por unidad</h5>
     </div>
     <div class="col">
-        <h5 class="text-center">Cantidad de trabajo</h5>
+        <h5 class="text-center subTituloHome">Cantidad de trabajo</h5>
     </div>
     <div class="col">
-        <h5 class="text-center">Total por trabajo</h5>
+        <h5 class="text-center subTituloHome">Total por trabajo</h5>
     </div>
 </div>`;
     items?.forEach(element => {
         itemsView += `<div class="d-flex">
                     <div class="col">
-                        <p class="text-center">${element.name}</p>
+                        <p class="text-center subTituloHome">${element.name}</p>
                     </div>
                     <div class="col">
-                        <p class="text-center">${element.valueUni}</p>
+                        <p class="text-center subTituloHome">${element.valueUni}</p>
                     </div>
                     <div class="col">
-                        <p class="text-center">${element.CantWork}</p>
+                        <p class="text-center subTituloHome">${element.CantWork}</p>
                     </div>
                     <div class="col">
-                        <p class="text-center">${element.CantTotalWork}</p>
+                        <p class="text-center subTituloHome">${element.CantTotalWork}</p>
                     </div>
                 </div>`;
     });
@@ -297,7 +297,7 @@ function completarTable() {
     works.forEach(element => {
         bodyTable += `<tr>
             <td>${element.name}</td>
-            <td>${element.unidad}</td>
+            <td class="descartarCelular">${element.unidad}</td>
             <td>${element.valorUni}</td>
             <td><button class="btn bt-sm btn-warning text-white" id="${rubro}_${element.id}"><i class="fa fa-pencil"></i></button></td>
         </tr>`;

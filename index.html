@@ -36,7 +36,10 @@
 <body class="fondoPage">
     <div class="d-flex justify-content-center mt-3">
         <div class="fondoCard text-white p-3">
-            <img src="./assets/img/LogoBlanco.png" class="logoHome" alt="Logo App">
+            <div class="divlogoHome">
+                <img src="./assets/img/LogoBlanco.png" class="logoHome" alt="Logo App">
+            </div>
+
             <p class="text-center tituloHome">Presupuestos Constructivos...</p>
             <p class="text-center subTituloHome">Hola Bienvenido/a!</p>
             <div class="row justify-content-center " id="dicBtnsPrimary">
@@ -46,9 +49,9 @@
                 <button class="btn btn-danger ms-3 mb-2 col-sm col-5" id="btnSearch">Buscar Presupuesto</button>
             </div>
             <div class="row justify-content-center descartar" id="createItems">
-                <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
+                <div class="row justify-content-center col-md-10 col-12 mt-2 fondoItems pb-4">
                     <div class="row justify-content-center">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-12">
                             <label for="rubrosNewWork">Seleccione el Rubro del item:</label>
                             <select name="rubrosNewWork" class="form-control" id="rubrosNewWork">
                                 <option value="Albanileria">Albañileria</option>
@@ -69,8 +72,8 @@
                             </button>
 
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-12 row">
+                        <div class="d-flex flex-column justify-content-center">
+                            <div class="col-12 d-flex flex-row">
                                 <div class="col-4">
                                     <label for="nameWork">Nombre del Trabajo</label>
                                 </div>
@@ -110,9 +113,9 @@
 
             </div>
             <div class="row justify-content-center descartar" id="tableWork">
-                <div class="row justify-content-center col-10 mt-2 fondoItems pb-4">
+                <div class="row justify-content-center col-md-10 col-12 mt-2 fondoItems pb-4">
                     <div class="row justify-content-center">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-12">
                             <label for="rubrosTableWork">Seleccione el Rubro</label>
                             <select name="rubrosTableWork" class="form-control" id="rubrosTableWork">
                                 <option value="Albanileria">Albañileria</option>
@@ -128,7 +131,7 @@
                             <thead class="table-dark table-bordered border-light">
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Unidad</th>
+                                    <th class="descartarCelular">Unidad</th>
                                     <th>Valor</th>
                                     <th></th>
                                 </tr>
@@ -141,7 +144,6 @@
                 </div>
             </div>
             <div class="row justify-content-center descartar" id="createPresup">
-
                 <div class="row justify-content-center col-md-10 col-12 mt-2 fondoItems pb-4">
                     <div class="row justify-content-center mb-3">
                         <div class="col-lg-4 col-8">
@@ -238,10 +240,10 @@
             </div>
             <div class="row justify-content-center descartar" id="viewPresXId">
                 <div class="row justify-content-end col-10 mt-2 fondoItems pb-4">
-                    <h3 class="text-center">Presupuesto de <span id="nameCustomerPres"></span></h3>
+                    <h3 class="text-center tituloHome">Presupuesto de <span id="nameCustomerPres"></span></h3>
                     <div id="divPresupuestoView"></div>
                     <div class="d-flex col">
-                        <input disabled class="form-control offset-9" type="text" id="totalPresView" value="0">
+                        <input disabled class="form-control offset-lg-9" type="text" id="totalPresView" value="0">
                     </div>
 
                 </div>
