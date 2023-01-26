@@ -158,31 +158,31 @@ function mostrarPresupuesto(id) {
     document.getElementById("totalPresView").value = "Total: $ " + totalPresup;
     let itemsView = `<div class="d-flex">
     <div class="col">
-        <h5 class="text-center subTituloHome">Trabajo</h5>
+        <h5 class="text-center TextPresu">Trabajo</h5>
     </div>
     <div class="col">
-        <h5 class="text-center subTituloHome">Valor Por unidad</h5>
+        <h5 class="text-center TextPresu">Valor Por unidad</h5>
     </div>
     <div class="col">
-        <h5 class="text-center subTituloHome">Cantidad de trabajo</h5>
+        <h5 class="text-center TextPresu">Cantidad de trabajo</h5>
     </div>
     <div class="col">
-        <h5 class="text-center subTituloHome">Total por trabajo</h5>
+        <h5 class="text-center TextPresu">Total por trabajo</h5>
     </div>
 </div>`;
     items?.forEach(element => {
         itemsView += `<div class="d-flex">
                     <div class="col">
-                        <p class="text-center subTituloHome">${element.name}</p>
+                        <p class="text-center TextPresu">${element.name}</p>
                     </div>
                     <div class="col">
-                        <p class="text-center subTituloHome">${element.valueUni}</p>
+                        <p class="text-center TextPresu">${element.valueUni}</p>
                     </div>
                     <div class="col">
-                        <p class="text-center subTituloHome">${element.CantWork}</p>
+                        <p class="text-center TextPresu">${element.CantWork}</p>
                     </div>
                     <div class="col">
-                        <p class="text-center subTituloHome">${element.CantTotalWork}</p>
+                        <p class="text-center TextPresu">${element.CantTotalWork}</p>
                     </div>
                 </div>`;
     });
@@ -356,23 +356,18 @@ function completarSelect() {
 
 function valorSelect(rubro, selected) {
     workStorage = new Array();
-    // if (workStorage.length <= 0) {
-        DataComnplete?.forEach(elRubro => {
-            nameRubro = Object.keys(elRubro)[0];
-            WorksDateBase = elRubro;
-            if (nameRubro == rubro) {
-                WorksDateBase[nameRubro].forEach(el => {
-                    if (el.id == selected) {
-                        workStorage.push(el)
-                    }
-                    return workStorage;
-                })
-            }
-
-        });
-    // } else {
-    //     workStorage = workStorage.filter((item) => item.id == selected) || new Array();
-    // }
+    DataComnplete?.forEach(elRubro => {
+        nameRubro = Object.keys(elRubro)[0];
+        WorksDateBase = elRubro;
+        if (nameRubro == rubro) {
+            WorksDateBase[nameRubro].forEach(el => {
+                if (el.id == selected) {
+                    workStorage.push(el)
+                }
+                return workStorage;
+            })
+        }
+    });
     Valor = workStorage.filter((item) => item.id == selected)
     document.getElementById("unidad").value = Valor[0].unidad;
     document.getElementById("valueUni").value = Valor[0].valorUni;
