@@ -1,3 +1,12 @@
+function limpiezaStorage() {
+    Inicio = JSON.parse(localStorage.getItem("InicioNuevo")) || new Array();
+    if (Inicio.length == 0) {
+        localStorage.clear();
+        localStorage.setItem("InicioNuevo", "1");
+    }
+
+}
+limpiezaStorage()
 //botones por id
 let btnNew = document.getElementById("btnNew");
 let btnEditWork = document.getElementById("btnEditWork");
@@ -431,9 +440,10 @@ function savePresup() {
 function saveWork() {
     let rubro = document.getElementById("rubrosNewWork").value;
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    let id_work = parseInt(document.getElementById("id_work").value);
+    let id_work = document.getElementById("id_work").value;
     let idControl = ""
     let id = ""
+
     if (id_work == "") {
         id = workStorage?.length || 0;
         if (id > 0) {
@@ -446,6 +456,7 @@ function saveWork() {
             if (nameRubro == rubro) {
                 if (id < elRubro[nameRubro].length) {
                     id = elRubro[nameRubro].length;
+                    console.log(elRubro[nameRubro]);
                 }
             }
         })
@@ -463,7 +474,7 @@ function saveWork() {
             }
         }
     } else {
-        id = id_work;
+        id = parseInt(id_work);
         idControl = id;
         let nameNewWork = document.getElementById("nameWork_0").value
         let uniNewWork = document.getElementById("uniWork_0").value
@@ -620,8 +631,8 @@ function deleteStorage(elem) {
         allowOutsideClick: false,
     }).then((result) => {
         if (result.isConfirmed) {
-            workStorage = workStorage.filter((item) => item.id == work_Id)
-            if (workStorage.length > 0) {
+            workStorage2 = workStorage.filter((item) => item.id == work_Id)
+            if (workStorage2.length > 0) {
                 workStorage = workStorage.filter((item) => item.id != work_Id)
                 newWorkJSON = JSON.stringify(workStorage);
                 localStorage.setItem(rubro, newWorkJSON);
