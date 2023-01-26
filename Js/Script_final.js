@@ -607,16 +607,16 @@ function changeWork(elem) {
     Swal.fire({
         title: '¿Que Desea hacer con este Trabajo?',
         showDenyButton: true,
-        showCancelButton: true,
+        showCloseButton: true,
+        showCancelButton: false,
         confirmButtonText: 'Editar',
         denyButtonText: `Eliminar`,
         allowOutsideClick: false,
     }).then((result) => {
         if (result.isConfirmed) {
             EditeWork(elem)
-        } else {
+        } else if (result.isDenied) {
             deleteStorage(elem)
-
         }
     })
 }
