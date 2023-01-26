@@ -607,7 +607,7 @@ function changeWork(elem) {
     Swal.fire({
         title: '¿Que Desea hacer con este Trabajo?',
         showDenyButton: true,
-        showCancelButton: false,
+        showCancelButton: true,
         confirmButtonText: 'Editar',
         denyButtonText: `Eliminar`,
         allowOutsideClick: false,
