@@ -438,98 +438,107 @@ function savePresup() {
 }
 
 function saveWork() {
-    let rubro = document.getElementById("rubrosNewWork").value;
-    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    let id_work = document.getElementById("id_work")?.value || "";
-    let idControl = ""
-    let id = ""
+    Swal.fire({
+        title: '¿Desea crear este/os Trabajos? El trabajo que no tenga todo los campos completos, no se creara',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Sí',
+        denyButtonText: `No`,
+        allowOutsideClick: false,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let rubro = document.getElementById("rubrosNewWork").value;
+            workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
+            let id_work = document.getElementById("id_work")?.value || "";
+            let idControl = ""
+            let id = ""
 
-    if (id_work == "") {
-        id = workStorage?.length || 0;
-        if (id > 0) {
-            ubic = id - 1;
-            id = workStorage[ubic].id;
-            id++;
-        }
-        DataComnplete?.forEach(elRubro => {
-            nameRubro = Object.keys(elRubro)[0];
-            if (nameRubro == rubro) {
-                if (id < elRubro[nameRubro].length) {
-                    id = elRubro[nameRubro].length;
-                    console.log(elRubro[nameRubro]);
-                }
-            }
-        })
-
-        idControl = id;
-        for (let i = 0; i <= cantNewWork; i++) {
-            let nameNewWork = document.getElementById("nameWork_" + i).value || "";
-            let uniNewWork = document.getElementById("uniWork_" + i).value || "";
-            let valorNewWork = document.getElementById("valueUni_" + i).value || "";
-            if (nameNewWork != "" && valorNewWork != "" && uniNewWork != "") {
-                workStorage.push({ "id": id, "name": nameNewWork, "unidad": uniNewWork, "dataBase": "storage", "status": 1, "valorUni": valorNewWork });
-                id++;
-                newWorkJSON = JSON.stringify(workStorage);
-                localStorage.setItem(rubro, newWorkJSON);
-            }
-        }
-    } else {
-        id = parseInt(id_work);
-        idControl = id;
-        let nameNewWork = document.getElementById("nameWork_0").value
-        let uniNewWork = document.getElementById("uniWork_0").value
-        let valorNewWork = document.getElementById("valueUni_0").value
-        if (nameNewWork != "" && valorNewWork != "" && uniNewWork != "") {
-            let paso = false;
-            workStorage.map(function (dato) {
-                if (dato.id == id) {
-                    paso = true;
-                    dato.name = nameNewWork;
-                    dato.unidad = uniNewWork;
-                    dato.dataBase = "storage";
-                    dato.valorUni = valorNewWork;
+            if (id_work == "") {
+                id = workStorage?.length || 0;
+                if (id > 0) {
+                    ubic = id - 1;
+                    id = workStorage[ubic].id;
                     id++;
                 }
-                return dato;
-            })
-            if (paso == true) {
-                id++;
-                newWorkJSON = JSON.stringify(workStorage);
-                localStorage.setItem(rubro, newWorkJSON);
-                document.getElementById("id_work").value = "";
+                DataComnplete?.forEach(elRubro => {
+                    nameRubro = Object.keys(elRubro)[0];
+                    if (nameRubro == rubro) {
+                        if (id < elRubro[nameRubro].length) {
+                            id = elRubro[nameRubro].length;
+                            console.log(elRubro[nameRubro]);
+                        }
+                    }
+                })
+
+                idControl = id;
+                for (let i = 0; i <= cantNewWork; i++) {
+                    let nameNewWork = document.getElementById("nameWork_" + i).value || "";
+                    let uniNewWork = document.getElementById("uniWork_" + i).value || "";
+                    let valorNewWork = document.getElementById("valueUni_" + i).value || "";
+                    if (nameNewWork != "" && valorNewWork != "" && uniNewWork != "") {
+                        workStorage.push({ "id": id, "name": nameNewWork, "unidad": uniNewWork, "dataBase": "storage", "status": 1, "valorUni": valorNewWork });
+                        id++;
+                        newWorkJSON = JSON.stringify(workStorage);
+                        localStorage.setItem(rubro, newWorkJSON);
+                    }
+                }
             } else {
-                workStorage.push({ "id": id, "name": nameNewWork, "unidad": uniNewWork, "dataBase": "storage", "status": 1, "valorUni": valorNewWork });
-                id++;
-                newWorkJSON = JSON.stringify(workStorage);
-                localStorage.setItem(rubro, newWorkJSON);
-                document.getElementById("id_work").value = "";
+                id = parseInt(id_work);
+                idControl = id;
+                let nameNewWork = document.getElementById("nameWork_0").value
+                let uniNewWork = document.getElementById("uniWork_0").value
+                let valorNewWork = document.getElementById("valueUni_0").value
+                if (nameNewWork != "" && valorNewWork != "" && uniNewWork != "") {
+                    let paso = false;
+                    workStorage.map(function (dato) {
+                        if (dato.id == id) {
+                            paso = true;
+                            dato.name = nameNewWork;
+                            dato.unidad = uniNewWork;
+                            dato.dataBase = "storage";
+                            dato.valorUni = valorNewWork;
+                            id++;
+                        }
+                        return dato;
+                    })
+                    if (paso == true) {
+                        id++;
+                        newWorkJSON = JSON.stringify(workStorage);
+                        localStorage.setItem(rubro, newWorkJSON);
+                        document.getElementById("id_work").value = "";
+                    } else {
+                        workStorage.push({ "id": id, "name": nameNewWork, "unidad": uniNewWork, "dataBase": "storage", "status": 1, "valorUni": valorNewWork });
+                        id++;
+                        newWorkJSON = JSON.stringify(workStorage);
+                        localStorage.setItem(rubro, newWorkJSON);
+                        document.getElementById("id_work").value = "";
+                    }
+                }
+            }
+            if (idControl < id) {
+                Swal.fire({
+                    title: 'Correcto!',
+                    html: 'Se guardo correctamente el trabajo nuevo.',
+                    icon: 'success',
+                    showCloseButton: true,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                });
+                UploadDataBase()
+                limpiarOcultarWorks();
+            } else {
+                Swal.fire({
+                    title: 'Atencion!',
+                    html: 'Debe completar todo los campos.',
+                    icon: 'error',
+                    showCloseButton: true,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                });
+                return false;
             }
         }
-    }
-    if (idControl < id) {
-        Swal.fire({
-            title: 'Correcto!',
-            html: 'Se guardo correctamente el trabajo nuevo.',
-            icon: 'success',
-            showCloseButton: true,
-            showCancelButton: false,
-            showConfirmButton: false
-        });
-        UploadDataBase()
-        limpiarOcultarWorks();
-    } else {
-        Swal.fire({
-            title: 'Atencion!',
-            html: 'Debe completar todo los campos.',
-            icon: 'error',
-            showCloseButton: true,
-            showCancelButton: false,
-            showConfirmButton: false
-        });
-        return false;
-    }
-
-
+    })
 }
 
 function activarBotones() {
