@@ -62,7 +62,7 @@ btnNew.onclick = () => {
     } else {
         Swal.fire({
             title: 'Atencion!',
-            html: 'no existe Trabajo creado.',
+            html: 'No existe trabajo creado.',
             icon: 'error',
             showCloseButton: true,
             showCancelButton: false,
@@ -80,7 +80,7 @@ btnEditWork.onclick = () => {
     } else {
         Swal.fire({
             title: 'Atencion!',
-            html: 'no existe Trabajo creado.',
+            html: 'No existe trabajo creado.',
             icon: 'error',
             showCloseButton: true,
             showCancelButton: false,
@@ -119,7 +119,7 @@ btnSearch.onclick = () => {
     } else {
         Swal.fire({
             title: 'Atencion!',
-            html: 'no existen Presupuestos.',
+            html: 'No existen presupuestos.',
             icon: 'error',
             showCloseButton: true,
             showCancelButton: false,
@@ -161,7 +161,7 @@ function mostrarPresupuesto(id) {
         <h5 class="text-center TextPresu">Trabajo</h5>
     </div>
     <div class="col">
-        <h5 class="text-center TextPresu">Valor Por unidad</h5>
+        <h5 class="text-center TextPresu">Valor por unidad</h5>
     </div>
     <div class="col">
         <h5 class="text-center TextPresu">Cantidad de trabajo</h5>
@@ -343,7 +343,7 @@ function completarSelect() {
     } else {
         Swal.fire({
             title: 'Atencion!',
-            html: 'no existe Trabajos Creados.',
+            html: 'No existe trabajos creados.',
             icon: 'error',
             showCloseButton: true,
             showCancelButton: false,
@@ -422,7 +422,7 @@ function savePresup() {
     } else {
         Swal.fire({
             title: 'Atencion!',
-            html: 'Falta completar el nombre del Cliente.',
+            html: 'Falta completar el nombre del cliente.',
             icon: 'error',
             showCloseButton: true,
             showCancelButton: false,
@@ -434,7 +434,7 @@ function savePresup() {
 
 function saveWork() {
     Swal.fire({
-        title: '¿Desea crear este/os Trabajos? El trabajo que no tenga todo los campos completos, no se creara',
+        title: '¿Desea crear este/os trabajos? </br>El trabajo que no tenga todo los campos completos, no se creara',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sí',
@@ -523,7 +523,7 @@ function saveWork() {
                 limpiarOcultarWorks();
             } else {
                 Swal.fire({
-                    title: 'Atencion!',
+                    title: 'Atención!',
                     html: 'Debe completar todo los campos.',
                     icon: 'error',
                     showCloseButton: true,
@@ -573,7 +573,7 @@ function limpiarOcultarWorks() {
 function deletePresStorage(id) {
     Presupuesto = JSON.parse(localStorage.getItem("presupuesto")) || new Array();
     Swal.fire({
-        title: '¿desea eliminar este Presupuesto? No se puede recuperar',
+        title: '¿Desea eliminar este presupuesto? </br> No se puede recuperar',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sí',
@@ -605,7 +605,7 @@ function changeWork(elem) {
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array()
     work_Id = elem2[1]
     Swal.fire({
-        title: '¿Que Desea hacer con este Trabajo?',
+        title: '¿Que desea hacer con este trabajo?',
         showDenyButton: true,
         showCloseButton: true,
         showCancelButton: false,
@@ -627,7 +627,7 @@ function deleteStorage(elem) {
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     work_Id = elem[1];
     Swal.fire({
-        title: '¿Desea eliminar/reestablecer de fabrica este Trabajo? No se puede recuperar',
+        title: '¿Desea eliminar/reestablecer de fabrica este trabajo? </br> No se puede recuperar',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sí',
@@ -658,14 +658,13 @@ function deleteStorage(elem) {
     })
 }
 
-
 function EditeWork(elem) {
     elem = elem.split("_")
     rubro = elem[0];
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
     work_Id = elem[1];
     Swal.fire({
-        title: '¿Desea editar este Trabajo?',
+        title: '¿Desea editar este trabajo?',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sí',
