@@ -440,7 +440,7 @@ function savePresup() {
 function saveWork() {
     let rubro = document.getElementById("rubrosNewWork").value;
     workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    let id_work = document.getElementById("id_work").value;
+    let id_work = document.getElementById("id_work")?.value || "";
     let idControl = ""
     let id = ""
 
