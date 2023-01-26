@@ -355,8 +355,8 @@ function completarSelect() {
 }
 
 function valorSelect(rubro, selected) {
-    workStorage = JSON.parse(localStorage.getItem(rubro)) || new Array();
-    if (workStorage.length <= 0) {
+    workStorage = new Array();
+    // if (workStorage.length <= 0) {
         DataComnplete?.forEach(elRubro => {
             nameRubro = Object.keys(elRubro)[0];
             WorksDateBase = elRubro;
@@ -370,9 +370,9 @@ function valorSelect(rubro, selected) {
             }
 
         });
-    } else {
-        workStorage = workStorage.filter((item) => item.id == selected) || new Array();
-    }
+    // } else {
+    //     workStorage = workStorage.filter((item) => item.id == selected) || new Array();
+    // }
     Valor = workStorage.filter((item) => item.id == selected)
     document.getElementById("unidad").value = Valor[0].unidad;
     document.getElementById("valueUni").value = Valor[0].valorUni;
