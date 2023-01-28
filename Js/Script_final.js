@@ -591,7 +591,6 @@ function deletePresStorage(id) {
 }
 
 function DeleteNewWork() {
-    document.getElementById("idNewWork").innerHTML = "";
     cantNewWork = cantNewWork - 2;
     addNewWork();
     if (cantNewWork <= 0) {
